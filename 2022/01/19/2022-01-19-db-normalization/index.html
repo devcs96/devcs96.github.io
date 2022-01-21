@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>정규화 (Normalization) - devcs</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="devcs"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="devcs"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="정규화 이론의 목표 가능한 데이터 중복성(Redundancy)를 제거해서 한가지 사실은 한 곳에서만 나타난다라는 원칙을 지키도록 한다.  즉 정규화 과정(Normalization procedure)란 중복을 최소화하기 위해 데이터를 구조화 하는 작업이다.  정규화 과정을 통해 특정 조건을 만족시키는 relation을 정규형이라고 한다. 제 1,2,3…정규형"><meta property="og:type" content="blog"><meta property="og:title" content="정규화 (Normalization)"><meta property="og:url" content="http://example.com/2022/01/19/2022-01-19-db-normalization/"><meta property="og:site_name" content="devcs"><meta property="og:description" content="정규화 이론의 목표 가능한 데이터 중복성(Redundancy)를 제거해서 한가지 사실은 한 곳에서만 나타난다라는 원칙을 지키도록 한다.  즉 정규화 과정(Normalization procedure)란 중복을 최소화하기 위해 데이터를 구조화 하는 작업이다.  정규화 과정을 통해 특정 조건을 만족시키는 relation을 정규형이라고 한다. 제 1,2,3…정규형"><meta property="og:locale" content="en_US"><meta property="og:image" content="http://example.com/images/db-normalization-01.jpg"><meta property="article:published_time" content="2022-01-19T12:06:37.000Z"><meta property="article:modified_time" content="2022-01-20T15:49:18.231Z"><meta property="article:author" content="kcs"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/images/db-normalization-01.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2022/01/19/2022-01-19-db-normalization/"},"headline":"정규화 (Normalization)","image":["http://example.com/images/db-normalization-01.jpg"],"datePublished":"2022-01-19T12:06:37.000Z","dateModified":"2022-01-20T15:49:18.231Z","author":{"@type":"Person","name":"kcs"},"publisher":{"@type":"Organization","name":"devcs","logo":{"@type":"ImageObject"}},"description":"정규화 이론의 목표 가능한 데이터 중복성(Redundancy)를 제거해서 한가지 사실은 한 곳에서만 나타난다라는 원칙을 지키도록 한다.  즉 정규화 과정(Normalization procedure)란 중복을 최소화하기 위해 데이터를 구조화 하는 작업이다.  정규화 과정을 통해 특정 조건을 만족시키는 relation을 정규형이라고 한다. 제 1,2,3…정규형"}</script><link rel="canonical" href="http://example.com/2022/01/19/2022-01-19-db-normalization/"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/rainbow.css"><link rel="preconnect" href="https://fonts.gstatic.com"><link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400&amp;family=Roboto" rel="stylesheet"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><link id="dark" rel="stylesheet" href="/css/custom.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">devcs</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/">🌙</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/devcs96"><i class="fab fa-github"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-9-tablet is-9-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-01-19T12:06:37.000Z" title="2022. 1. 19. 오후 9:06:37">2022-01-19</time></span><span class="level-item">Updated&nbsp;<time dateTime="2022-01-20T15:49:18.231Z" title="2022. 1. 21. 오전 12:49:18">2022-01-21</time></span><span class="level-item"><a class="link-muted" href="/categories/Computer-Science/">Computer Science</a><span> / </span><a class="link-muted" href="/categories/Computer-Science/Database/">Database</a></span><span class="level-item">12 minutes read (About 1806 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">정규화 (Normalization)</h1><div class="content"><h2 id="정규화-이론의-목표"><a href="#정규화-이론의-목표" class="headerlink" title="정규화 이론의 목표"></a>정규화 이론의 목표</h2><ul>
+<li>가능한 데이터 중복성(Redundancy)를 제거해서 한가지 사실은 한 곳에서만 나타난다라는 원칙을 지키도록 한다. </li>
+<li>즉 정규화 과정(Normalization procedure)란 중복을 최소화하기 위해 데이터를 구조화 하는 작업이다. </li>
+<li>정규화 과정을 통해 특정 조건을 만족시키는 relation을 정규형이라고 한다. 제 1,2,3…정규형 등이 존재한다. </li>
+</ul>
+<h2 id="왜-정규화가-필요한가"><a href="#왜-정규화가-필요한가" class="headerlink" title="왜 정규화가 필요한가?"></a>왜 정규화가 필요한가?</h2><ul>
+<li>정규화를 하지 않는 경우에 data redundancy로 인해 다음과 같은 이상현상들이 발생할 수 있다.</li>
+</ul>
+<ol>
+<li><p>insert annomaly (삼입 이상 ) : 특정 데이터를 삼입하고 싶은데, 자료가 부족해 삼입할 수 없다. 예를 들면 공급자,도시,부품이라는 attribute가 있다고 하면 공급자가 어떤 도시에 살고 있다는 정보는 부품이라는 정보가 있어야만 삼입할 수 있다.</p>
+</li>
+<li><p>deletion annomaly (삭제 이상) : 하나의 정보를 삭제하고 싶지만, 필요한 정보까지 삭제될 수 있다. 위 예와 동일한데, tuple을 삭제할 경우에 공급자가 어떤 도시에 살고 있다는 정보가 소실될 수 있다.</p>
+</li>
+<li><p>update annomaly (갱신 이상) : 데이터 갱신 중간 과정에 일부 data는 update된 상태, 일부 data는 original 상태로 inconsistent한 상태가 생길 수 있다. </p>
+</li>
+</ol>
+<h2 id="정규형-만족-조건"><a href="#정규형-만족-조건" class="headerlink" title="정규형 만족 조건"></a>정규형 만족 조건</h2><ul>
+<li> 분해 집합은 무손실 조인, 무손실 분해 (nonloss decomposition)를 만족해야 한다. </li>
+<li> 분해 집합은 함수적 종속성(functional dependency)을 보존해야 한다. </li>
+</ul>
+<h2 id="Nonloss-Decomposition-무손실-분해-이란"><a href="#Nonloss-Decomposition-무손실-분해-이란" class="headerlink" title="Nonloss Decomposition (무손실 분해) 이란?"></a>Nonloss Decomposition (무손실 분해) 이란?</h2><ul>
+<li>non-loss decomposition : 특정 relation 을 다른 relation으로 분해하는 것으로 , 이 과정은 정보의 손실이 있어서는 안된다. 즉 가역적이여야 한다. </li>
+<li>가역적이란 말은 분해 이후 다시 table을 join 하였을떄 최초의 relation과 동일해야 한다는 말이다. </li>
+</ul>
+<h2 id="Functional-Dependency-함수적-종속성-이란"><a href="#Functional-Dependency-함수적-종속성-이란" class="headerlink" title="Functional Dependency (함수적 종속성) 이란?"></a>Functional Dependency (함수적 종속성) 이란?</h2><ul>
+<li>특정 relation 안에서 하나의 속성 집합에서 다른 속성으로의 다대일 (many-to-one)관계이다. 정확한 정의는 다음과 같다.</li>
+</ul>
+<blockquote>
+R을 relation이라 하고, X와 Y를 R의 속성 집합의 임의의 부분집합이라고 할때, Y가 X에게 함수적으로 종속되기 위한 필요 충분 조건은 다음과 같다.
+R에 있는 각각의 X의 값이 정확하게 하나의 Y의 값과 관련을 갖는 것이다.
+
+<p>이를  “X가 Y를 함수적으로 결정한다.” 또는 기호로는 X-&gt;Y 로 표시한다.  </p>
+</blockquote>
+
+<span id="more"></span>
+
+<p>예를 들면 아래와 같은 relation에서 </p>
+<p><img src="/images/db-normalization-01.jpg"></p>
+<p>S# -&gt; CITY FD를 만족한다. 그 이유는 CITY가 S#에게 함수적으로 종속되기 위한 필요 충분 조건은 S#의 값이 정확하게 하나의 CITY의 값을 가지는 것인데,<br>동일한 S# attribute는 동일한 CITY값을 가지기 때문이다. </p>
+<p>S# -&gt; CITY 에서 좌변을 결정자(determinant) , 우변을 종속자(dependent)라고 자주 부른다. </p>
+<ul>
+<li>만일 x가 relation 의 후보키 (candidate key) 라면 반드시 relation의 모든 속성들 y는 x에 함수적으로 종속되어야 한다. </li>
+</ul>
+<p>이는 후보키 정의를 보면 당연한데, 후보키 는 다음과 같은 성질을 만족할떄 후보키라고 한다.</p>
+<ol>
+<li>유일성 : 유일하게 tuple을 식별</li>
+<li>비분해성 : 해당 후보키의 부분 집합 중에 유일성을 만족시키는 부분집합이 없음 </li>
+</ol>
+<p>즉 유일성 필요충분조건에 따라 나머지 모든 속성들은 후보키에 함수적으로 종속될 수 밖에 없다. </p>
+<h2 id="제-1-정규형"><a href="#제-1-정규형" class="headerlink" title="제 1 정규형"></a>제 1 정규형</h2><ul>
+<li>어떤 relation 이 1NF 이기 위해서는 모든 attribute가 domain에 속하는 단 하나의 값만을 가져야 한다. 즉 대부분의 relation은 1NF를 대부분 만족한다</li>
+</ul>
+<h2 id="제-2-정규형"><a href="#제-2-정규형" class="headerlink" title="제 2 정규형"></a>제 2 정규형</h2><ul>
+<li>모든 non-key attribute가 primary key에 대해 최소성으로 종속적이다. 즉 기본키에 대해서 나머지 attribute들이 종속적이라는 말이다. </li>
+<li>완전 함수적 종속이라고도 표현한다. </li>
+<li>제 2 정규형을 만족시키기 위해서는 기본키에 대해 비최소성을 가지는 함수적 종속성을 제거하면 된다. </li>
+</ul>
+<h2 id="제-3-정규형"><a href="#제-3-정규형" class="headerlink" title="제 3 정규형"></a>제 3 정규형</h2><ul>
+<li>2NF를 만족함과 동시에, 모든 non-key attribute과 primary key에 대해 비이행적(non-transitive dependency)으로 종속적이다. </li>
+<li>제 3 정규형을 만족시키기 위해서는 기본키를 제외한 non-key attribute간에 상호 종속성을 제거하면 된다.</li>
+</ul>
+<p>ex) 예를 들면 기본키인 S# attribute가 있을떄, S# 에 의해 나머지 두 attribute (city,status) 가 최소성으로 종속적이다. 2NF를 만족하는데, city에 의해 status attribute가 결정된다. 즉 이행적 종속관계가 있다는 말이다. </p>
+<p>해당 relation의 FD를 정의하면 다음과 같을 것이다.</p>
+<ol>
+<li>s# -&gt; city </li>
+<li>s# -&gt; status </li>
+<li>city -&gt; status</li>
+</ol>
+<p>여기서 S#-&gt;city-&gt;status 임으로 s# -&gt; status 임은 유추될 수 있는 이행적 함수 종속성임으로 제거될 수 있는 FD이다. 따라서 이를 decomposition하여 2개의 relation으로 나누어야 한다. 예를 들면 r1(s#,city) , r2(city,status) 로 2개의 relation으로 나누어질 수 있을 것이다. </p>
+<h2 id="BCNF-Boyce-Codd-Normal-Form-정규형"><a href="#BCNF-Boyce-Codd-Normal-Form-정규형" class="headerlink" title="BCNF (Boyce/Codd Normal Form) 정규형"></a>BCNF (Boyce/Codd Normal Form) 정규형</h2><ul>
+<li>BCNF 정규형이 왜 나왔는가?</li>
+</ul>
+<p>이전 3 NF 까지는 후보키가 둘 이상이고, 두 후보키가 복합속성이면서 일부 속성이 겹치는 경우에 데이터 중복이 생기는 현상을 다루지 못했다. </p>
+<ul>
+<li>비직관적 (non-trivial) , 좌변-최소성(left-irreducible) FD들이 후보키를 결정자로 갖는 것이다. 즉 relation이 BCNF 정규형을 만족시키는 필요충분조건은 오직 후보키들만이 결정자가 되는 것이다. </li>
+<li>종속성 다이어그램에서 화살표가 후보키에서만 나오는 것이라고 보면 된다. </li>
+</ul>
+<p>이외에도 고등 정규형 4NF,5NF가 있는데, 대체로 3NF,BCNF 까지 정규화를 수행한다고 한다. 고등 정규형 4NF,5NF에 대해서는 별도로 정리하여 다루도록 하려고 한다. </p>
+<h2 id="정규화-정리"><a href="#정규화-정리" class="headerlink" title="정규화 정리"></a>정규화 정리</h2><p>정규화 과정의 목적은 Data 중복성을 제거해 여러가지 이상현상(삼입,삭제,갱신 이상) 현상들을 제거 하고, 실세계에 가깝게 데이터베이스를 설계해서 직관적으로 이해되고 , 확장이 쉬운 구조로 만드는 것이다. </p>
+<h2 id="역정규화-Denormalization"><a href="#역정규화-Denormalization" class="headerlink" title="역정규화 (Denormalization)"></a>역정규화 (Denormalization)</h2><ul>
+<li>정규화 과정의 성능적인 이슈 </li>
+</ul>
+<p>정규화 과정을 거치면서 하나의 relation을 물리적으로 여러개의 relation 으로 분해가 이루어진다. 즉 I/O작업이 이루어질떄는 원하는 데이터를 가져올때 그만큼 많은 JOIN연산이 이루어질 수 있다. 따라서 성능적으로 이점을 얻고자 일부 데이터 중복을 허용하면서 JOIN 연산을 피하는 것이 역정규화이다. </p>
+</div><!--!--></article></div><!--!--><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script><script>var gitalk = new Gitalk({
+            id: "bc130a565712b19429b4522651ae4386",
+            repo: "gittalk",
+            owner: "devcs96",
+            clientID: "ad3debd03c0e5f289948",
+            clientSecret: "471b03d4771d8a3467d95e33fde1e2d8804d5da8",
+            admin: ["devcs96"],
+            createIssueManually: false,
+            distractionFreeMode: false,
+            perPage: 10,
+            pagerDirection: "last",
+            
+            
+            enableHotKey: true,
+            
+        })
+        gitalk.render('comment-container')</script></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2022/01/21/2022-01-21-Item44/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Item44. 표준 함수형 인터페이스를 사용하라</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2022/01/19/2022-01-19-Item43/"><span class="level-item">Item43. 람다보다는 메소드 참조를 사용하라</span><i class="level-item fas fa-chevron-right"></i></a></div></nav></div><div class="column column-left is-2-tablet is-2-desktop is-2-widescreen  order-1"><!--!--><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">Categories</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/Algorithm/"><span class="level-start"><span class="level-item">Algorithm</span></span><span class="level-end"><span class="level-item tag">4</span></span></a><ul><li><a class="level is-mobile" href="/categories/Algorithm/Graph/"><span class="level-start"><span class="level-item">Graph</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Algorithm/sorting/"><span class="level-start"><span class="level-item">sorting</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Computer-Science/"><span class="level-start"><span class="level-item">Computer Science</span></span><span class="level-end"><span class="level-item tag">11</span></span></a><ul><li><a class="level is-mobile" href="/categories/Computer-Science/Algorithm/"><span class="level-start"><span class="level-item">Algorithm</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Computer-Science/Data-Structure/"><span class="level-start"><span class="level-item">Data Structure</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Computer-Science/Data-structure/"><span class="level-start"><span class="level-item">Data structure</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Computer-Science/Database/"><span class="level-start"><span class="level-item">Database</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/Computer-Science/Network/"><span class="level-start"><span class="level-item">Network</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Computer-Science/OS/"><span class="level-start"><span class="level-item">OS</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Data-Structure/"><span class="level-start"><span class="level-item">Data Structure</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Design-Pattern/"><span class="level-start"><span class="level-item">Design Pattern</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/Infrastructure/"><span class="level-start"><span class="level-item">Infrastructure</span></span><span class="level-end"><span class="level-item tag">1</span></span></a><ul><li><a class="level is-mobile" href="/categories/Infrastructure/Kubernetes/"><span class="level-start"><span class="level-item">Kubernetes</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Java/"><span class="level-start"><span class="level-item">Java</span></span><span class="level-end"><span class="level-item tag">49</span></span></a><ul><li><a class="level is-mobile" href="/categories/Java/Effective-Java-3-E/"><span class="level-start"><span class="level-item">Effective Java 3/E</span></span><span class="level-end"><span class="level-item tag">43</span></span></a></li><li><a class="level is-mobile" href="/categories/Java/Jpa/"><span class="level-start"><span class="level-item">Jpa</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Java/Junit/"><span class="level-start"><span class="level-item">Junit</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Java/Jvm/"><span class="level-start"><span class="level-item">Jvm</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Javascript/"><span class="level-start"><span class="level-item">Javascript</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/Nodejs/"><span class="level-start"><span class="level-item">Nodejs</span></span><span class="level-end"><span class="level-item tag">1</span></span></a><ul><li><a class="level is-mobile" href="/categories/Nodejs/express/"><span class="level-start"><span class="level-item">express</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/kotlin/"><span class="level-start"><span class="level-item">kotlin</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/spring/"><span class="level-start"><span class="level-item">spring</span></span><span class="level-end"><span class="level-item tag">18</span></span></a><ul><li><a class="level is-mobile" href="/categories/spring/Batch/"><span class="level-start"><span class="level-item">Batch</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/spring/Core-Concept/"><span class="level-start"><span class="level-item">Core Concept</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/spring/Design-Pattern/"><span class="level-start"><span class="level-item">Design Pattern</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/spring/Jpa/"><span class="level-start"><span class="level-item">Jpa</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/spring/%ED%86%A0%EB%B9%84%EC%9D%98-spring/"><span class="level-start"><span class="level-item">토비의 spring</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%EA%B0%9C%EB%B0%9C-%EC%83%81%EC%8B%9D/"><span class="level-start"><span class="level-item">개발 상식</span></span><span class="level-end"><span class="level-item tag">2</span></span></a><ul><li><a class="level is-mobile" href="/categories/%EA%B0%9C%EB%B0%9C-%EC%83%81%EC%8B%9D/Git/"><span class="level-start"><span class="level-item">Git</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-01-21T12:57:43.000Z">2022-01-21</time></p><p class="title"><a href="/2022/01/21/2022-01-21-Item44/">Item44. 표준 함수형 인터페이스를 사용하라</a></p><p class="categories"><a href="/categories/Java/">Java</a> / <a href="/categories/Java/Effective-Java-3-E/">Effective Java 3/E</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-01-19T12:06:37.000Z">2022-01-19</time></p><p class="title"><a href="/2022/01/19/2022-01-19-db-normalization/">정규화 (Normalization)</a></p><p class="categories"><a href="/categories/Computer-Science/">Computer Science</a> / <a href="/categories/Computer-Science/Database/">Database</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-01-19T10:52:24.000Z">2022-01-19</time></p><p class="title"><a href="/2022/01/19/2022-01-19-Item43/">Item43. 람다보다는 메소드 참조를 사용하라</a></p><p class="categories"><a href="/categories/Java/">Java</a> / <a href="/categories/Java/Effective-Java-3-E/">Effective Java 3/E</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-01-18T10:29:33.000Z">2022-01-18</time></p><p class="title"><a href="/2022/01/18/2022-01-18-Item42/">Item42. 익명 클래스보다 람다를 사용하라</a></p><p class="categories"><a href="/categories/Java/">Java</a> / <a href="/categories/Java/Effective-Java-3-E/">Effective Java 3/E</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-01-17T15:55:07.000Z">2022-01-18</time></p><p class="title"><a href="/2022/01/18/2022-01-18-Jpa-%EC%97%B0%EA%B4%80%EA%B4%80%EA%B3%84/">연관관계 매핑</a></p><p class="categories"><a href="/categories/Java/">Java</a> / <a href="/categories/Java/Jpa/">Jpa</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">Archives</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2022/01/"><span class="level-start"><span class="level-item">January 2022</span></span><span class="level-end"><span class="level-item tag">31</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/12/"><span class="level-start"><span class="level-item">December 2021</span></span><span class="level-end"><span class="level-item tag">27</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/11/"><span class="level-start"><span class="level-item">November 2021</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/08/"><span class="level-start"><span class="level-item">August 2021</span></span><span class="level-end"><span class="level-item tag">10</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/07/"><span class="level-start"><span class="level-item">July 2021</span></span><span class="level-end"><span class="level-item tag">24</span></span></a></li></ul></div></div></div><!--!--></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>

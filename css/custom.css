@@ -1,0 +1,65 @@
+.navbar-main {
+  background-color: #000 !important;
+}
+.navbar-main a:hover {
+  background-color: #fff;
+  -webkit-transition: 0.7s;
+  transition: 0.7s;
+}
+.section {
+  background-color: #1b1e23;
+}
+figure[class=highlight] p,
+figure[class=highlight] span,
+figure[class=highlight] pre,
+figure[class=highlight] li {
+  font-weight: bolder;
+}
+.card {
+  -webkit-box-shadow: 2px 2px 5px #000 !important;
+  box-shadow: 2px 2px 5px #000 !important;
+  background-color: #2a2a35 !important;
+}
+.card h1 {
+  color: #3273dc;
+}
+.card .content a,
+.card .content li,
+.card .content h1,
+.card .content h2,
+.card .content h3,
+.card .content h4,
+.card .content h5,
+.card .content h6,
+.card .content p,
+.card .is-active a,
+.card .is-active li,
+.card .is-active h1,
+.card .is-active h2,
+.card .is-active h3,
+.card .is-active h4,
+.card .is-active h5,
+.card .is-active h6,
+.card .is-active p {
+  color: #fff;
+}
+.card .content strong,
+.card .is-active strong {
+  color: #eb70ad !important;
+}
+.menu-list li a:hover {
+  background-color: #fff !important;
+}
+.menu-list li a:hover .level-item {
+  color: #264de4 !important;
+}
+.menu-list li a .level-end .level-item {
+  color: #000 !important;
+}
+.widget span,
+.widget p {
+  color: #ccc !important;
+}
+article .content a {
+  color: #264de4 !important;
+}
