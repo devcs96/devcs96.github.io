@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>네트워크 통신하기 - devcs</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="devcs"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="devcs"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="네트워크 통신 방식Unicast  출발지와 목적지가 1:1 통신  BroadCast 같은 네트워크에 존재하는 모든 host가 목적지 (1: 모든 통신) local 네트워크 내에서 모든 host에게 패킷을 전달할 때 사용됨 IPv6에서는 브로드 캐스트가 존재하지 않고, 링크 로컬 멀티캐스트로 대체되어 사용되고 있다.   Multicast 다수의 특정 목적지로"><meta property="og:type" content="blog"><meta property="og:title" content="네트워크 통신하기"><meta property="og:url" content="http://example.com/2022/02/06/2022-02-06-network-ch03/"><meta property="og:site_name" content="devcs"><meta property="og:description" content="네트워크 통신 방식Unicast  출발지와 목적지가 1:1 통신  BroadCast 같은 네트워크에 존재하는 모든 host가 목적지 (1: 모든 통신) local 네트워크 내에서 모든 host에게 패킷을 전달할 때 사용됨 IPv6에서는 브로드 캐스트가 존재하지 않고, 링크 로컬 멀티캐스트로 대체되어 사용되고 있다.   Multicast 다수의 특정 목적지로"><meta property="og:locale" content="en_US"><meta property="og:image" content="http://example.com/images/network-ch03-01.jpg"><meta property="og:image" content="http://example.com/images/network-ch03-02.jpg"><meta property="og:image" content="http://example.com/images/network-ch03-03.jpg"><meta property="article:published_time" content="2022-02-06T09:45:58.000Z"><meta property="article:modified_time" content="2022-02-06T15:21:20.519Z"><meta property="article:author" content="kcs"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/images/network-ch03-01.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2022/02/06/2022-02-06-network-ch03/"},"headline":"네트워크 통신하기","image":["http://example.com/images/network-ch03-01.jpg","http://example.com/images/network-ch03-02.jpg","http://example.com/images/network-ch03-03.jpg"],"datePublished":"2022-02-06T09:45:58.000Z","dateModified":"2022-02-06T15:21:20.519Z","author":{"@type":"Person","name":"kcs"},"publisher":{"@type":"Organization","name":"devcs","logo":{"@type":"ImageObject"}},"description":"네트워크 통신 방식Unicast  출발지와 목적지가 1:1 통신  BroadCast 같은 네트워크에 존재하는 모든 host가 목적지 (1: 모든 통신) local 네트워크 내에서 모든 host에게 패킷을 전달할 때 사용됨 IPv6에서는 브로드 캐스트가 존재하지 않고, 링크 로컬 멀티캐스트로 대체되어 사용되고 있다.   Multicast 다수의 특정 목적지로"}</script><link rel="canonical" href="http://example.com/2022/02/06/2022-02-06-network-ch03/"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/rainbow.css"><link rel="preconnect" href="https://fonts.gstatic.com"><link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400&amp;family=Roboto" rel="stylesheet"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><link id="dark" rel="stylesheet" href="/css/custom.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">devcs</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/">🌙</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/devcs96"><i class="fab fa-github"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-9-tablet is-9-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-02-06T09:45:58.000Z" title="2022. 2. 6. 오후 6:45:58">2022-02-06</time></span><span class="level-item">Updated&nbsp;<time dateTime="2022-02-06T15:21:20.519Z" title="2022. 2. 7. 오전 12:21:20">2022-02-07</time></span><span class="level-item"><a class="link-muted" href="/categories/Computer-Science/">Computer Science</a><span> / </span><a class="link-muted" href="/categories/Computer-Science/Network/">Network</a><span> / </span><a class="link-muted" href="/categories/Computer-Science/Network/IT-%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A5%BC-%EC%9C%84%ED%95%9C-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EC%9E%85%EB%AC%B8/">IT 엔지니어를 위한 네트워크 입문</a></span><span class="level-item">12 minutes read (About 1848 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">네트워크 통신하기</h1><div class="content"><h2 id="네트워크-통신-방식"><a href="#네트워크-통신-방식" class="headerlink" title="네트워크 통신 방식"></a>네트워크 통신 방식</h2><h2 id="Unicast"><a href="#Unicast" class="headerlink" title="Unicast"></a>Unicast</h2><ul>
+<li> 출발지와 목적지가 1:1 통신</li>
+</ul>
+<h2 id="BroadCast"><a href="#BroadCast" class="headerlink" title="BroadCast"></a>BroadCast</h2><ul>
+<li>같은 네트워크에 존재하는 모든 host가 목적지 (1: 모든 통신)</li>
+<li>local 네트워크 내에서 모든 host에게 패킷을 전달할 때 사용됨</li>
+<li>IPv6에서는 브로드 캐스트가 존재하지 않고, 링크 로컬 멀티캐스트로 대체되어 사용되고 있다. </li>
+</ul>
+<h2 id="Multicast"><a href="#Multicast" class="headerlink" title="Multicast"></a>Multicast</h2><ul>
+<li>다수의 특정 목적지로 데이터 전송 (1: 멀티캐스트 구독 호스트들)</li>
+</ul>
+<h2 id="AnyCast"><a href="#AnyCast" class="headerlink" title="AnyCast"></a>AnyCast</h2><ul>
+<li>가장 가까운 호스트 (1:1 통신인데, 목적지는 동일 그룹내 1개 호스트 )</li>
+<li>가장 가까운 DNS 서버 , Gateway를 찾는데 사용하기도 함 </li>
+<li>Unicast와 다르게 anycast는 같은 목적지 주소를 가진 서버가 여러대이다. </li>
+</ul>
+<h2 id="BUM-트래픽"><a href="#BUM-트래픽" class="headerlink" title="BUM 트래픽"></a>BUM 트래픽</h2><ul>
+<li>B(broadcast) , U(Unknown unicast) , M(multicast) 을 지칭 , BUM 트래픽이 많으면 네트워크 성능 저하 </li>
+<li>unknown unicast는 스위치가 목적지 주소를 몰라 , 모든 포트로 전송하는데 이러한 unicast를 unknown unicast라고 함 (unicast지만, 마치 broadcast와 유사한 동작 )</li>
+<li>이더넷 환경에서는 ARP broadcast를 먼저 보내고 통신을 시작하므로 BUM 트래픽이 많이 발생하지 않음 </li>
+</ul>
+<span id="more"></span>
+
+<hr>
+
+<h2 id="MAC-주소"><a href="#MAC-주소" class="headerlink" title="MAC 주소"></a>MAC 주소</h2><ul>
+<li>MAC주소는 변경할 수 없도록 하드웨어(네트워크 인터페이스 카드)에 고정되어 출하하므로, 네트워크 구성 요소마다 다른 주소를 가지고 있다. </li>
+<li>BIA(Burned in address) : 하드웨어적으로 고정되어 나오는 주소므로 BIA라고도 부른다. </li>
+<li>MAC 주소는 48bit의 16진수 12자리로 표현됨<br><img src="/images/network-ch03-01.jpg"></li>
+</ul>
+<ol>
+<li>OUI : IEEE가 제조사에 할당하는 코드 영역</li>
+<li>UAA : 제조사 내에서 네트워크 구성 요소에 할당하는 부분 </li>
+</ol>
+<ul>
+<li>가끔 제조사에서 동일한 UAA주소를 할당하는 경우가 있는데, 이떄는 MAC주소가 중복된다. 동일 네트워크 안에서만 겹치지 않으면 라우터에서 다른 네트워크로 넘겨줄때, 출발지와 도착지의 MAC주소가 변경되므로 동작하는데는 문제가 없다. </li>
+</ul>
+<h2 id="MAC-주소-동작-방식"><a href="#MAC-주소-동작-방식" class="headerlink" title="MAC 주소 동작 방식"></a>MAC 주소 동작 방식</h2><ol>
+<li>NIC은 자신의 MAC주소를 가지고 있고, 1계층을 통해 전기신호가 들어오면 이를 bit열(데이터 형태)로 변환해서 도착지 MAC주소를 확인한다. </li>
+<li>도착지 MAC주소가 자신과 동일한 경우나 broadcast,multicast의 경우에는 상위 계층으로 패킷정보를 넘기고, 그렇지 않은 경우에는 패킷을 폐기한다. </li>
+</ol>
+<p>broadcast,multicast의 경우에는 NIC에서 자체적으로 처리하는 게 아니라 OS나 app에서 처리함으로 시스템에 부하가 작용한다. </p>
+<hr>
+
+<h2 id="IP-주소"><a href="#IP-주소" class="headerlink" title="IP 주소"></a>IP 주소</h2><p>IP 주소는 3계층에서 사용되는 주소로서, 다음과 같은 특징을 가진다.</p>
+<ul>
+<li> 사용자가 변경 가능한 논리적인 주소</li>
+<li> 네트워크 주소와 호스트 주소로 나뉜다. </li>
+</ul>
+<p>32bit v4, 128bit v6 두 버전이 있는데 흔히 v4를 사용한다.</p>
+<p>네트워크 주소는 호스트를 모은 네트워크를 지칭하는 주소로, 네트워크 주소가 같은 네트워크를 local 네트워크라고 한다.<br>호스트 주소는 같은 네트워크 주소 내에 존재하는 각 호스트를 구분하기 위한 주소이다. </p>
+<h2 id="IP-주소-할당-방식-classful-address"><a href="#IP-주소-할당-방식-classful-address" class="headerlink" title="IP 주소 할당 방식 - classful address"></a>IP 주소 할당 방식 - classful address</h2><p>IP 주소 체계는 과거에 필요한 호스트 IP 개수에 따라 네트워크의 크기를 다르게 할당할 수 있는 클래스 주소체계를 도입하였다. </p>
+<p>IP 주소의 네트워크 부분을 8,16,24 bit로 제한했었고, 8,16,24 bit 서브넷 주소를 갖는 서브넷을 각각 A,B,C class라고 한다. </p>
+<ul>
+<li>A class : 2^24 host 주소 (약 1600만개)</li>
+<li>B class : 2^16 host 주소 (약 6만 5천개)</li>
+<li>C class : 2^8 host 주소 (약 250개)</li>
+</ul>
+<p><img src="/images/network-ch03-02.jpg"></p>
+<p>(ref- <a target="_blank" rel="noopener" href="http://korean-daeddo.blogspot.com/2015/12/ip.html">http://korean-daeddo.blogspot.com/2015/12/ip.html</a>)</p>
+<h2 id="class-구분법"><a href="#class-구분법" class="headerlink" title="class 구분법"></a>class 구분법</h2><p>A,B,C class는 맨 앞 옥텟의 주소만 보고 구분할 수 있다. </p>
+<ul>
+<li>A class : 맨 앞 bit가 0인 주소(00000000 ~ 01111111) , 1 ~ 127 </li>
+</ul>
+<p>예외로 127.0.0.1 주소는 루프백이다.                 </p>
+<ul>
+<li><p>B class : 두번쨰 bit가 0인 주소 (10000000~ 10111111) , 128 ~ 191</p>
+</li>
+<li><p>C class  : 세번쨰 bit가 0인 주소 (11000000 ~ 11011111) , 192 ~ 223 </p>
+</li>
+</ul>
+<h2 id="IP-주소-할당-방식-classless-address-CIDR"><a href="#IP-주소-할당-방식-classless-address-CIDR" class="headerlink" title="IP 주소 할당 방식 - classless address ,CIDR"></a>IP 주소 할당 방식 - classless address ,CIDR</h2><p>classful 주소 체계의 문제점은 상위 class (A class) 를 할당받은 기관에서 호스트 주소를 전부 사용하지 못하면서 전체 IP 주소 자체의 부족현상이 나타남 </p>
+<p>따라서 class기반의 주소 체계를 버리고 현재는 CIDR(Classless Inter-Domain Routing)기반의 주소 체계를 사용함.</p>
+<h2 id="subnet-mask"><a href="#subnet-mask" class="headerlink" title="subnet mask"></a>subnet mask</h2><p>subnet mask는 IP주소와 네트워크 주소를 구분할 떄 사용하는데 2진수 숫자1은 네트워크 주소 , 숫자0은 호스트 주소로 표시한다.<br>보통 10진수를 사용해 255.0.0.0 , 255.255.0.0 같이 사용하며 255 부분이 네트워크 주소이다. </p>
+<p>ex) Ipv4 주소 : 103.9.32.146 / subnet mask : 255.255.255.0 인 경우 네트워크 주소는 103.9.32.0이고, 호스트 주소는 0.0.0.146이다. </p>
+<ul>
+<li><p>subnet mask 표기법 : bit로 표기할때는 보통 “IP주소/비트수”로 표기한다. </p>
+</li>
+<li><p>subnet의 구체적인 정의 : 호스트들이 하나의 라우터 인터페이스로 연결된 네트워크를 subnet을 구성한다고 하며, 고립된 로컬 네트워크 각각을 subnet 이라고 부른다. </p>
+</li>
+</ul>
+<h2 id="subnetting"><a href="#subnetting" class="headerlink" title="subnetting"></a>subnetting</h2><p>원래 부여된 classful 단위의 네트워크보다 더 쪼개 사용하는 것을 subnetting이라고 한다.<br>8bit 옥텟단위의 class를 1bit 단위로 네트워크를 분할하여 사용한다. </p>
+<p><img src="/images/network-ch03-03.jpg"></p>
+<ul>
+<li>네트워크 사용자 입장 </li>
+</ul>
+<p>네트워크 사용자는 이미 설계된 네트워크에서 사용할 수 있는 IP주소 범위를 파악할 수 있어야 한다. 네트워크 유효 범위를 파악하는 방법은 다음과 같다.</p>
+<ol>
+<li>내 IP주소를 2진수로 변경</li>
+<li>Subnet mask를 2진수로 변경</li>
+<li>subnetting 된 네트워크 주소 파악 (AND연산)</li>
+<li>호스트 주소 부분을 모두 1로 변경해 broadcast 주소 파악 </li>
+<li>최소 IP 주소(subnetting된 네트워크 주소 + 1 ) 와 최대 IP 주소 (broadcast주소 -1 ) 파악 </li>
+</ol>
+<ul>
+<li>네트워크 설계자 입장 </li>
+</ul>
+<p>네트워크 크기를 고려해 subnet mask를 결정해야 한다. 예를 들면 subnet 된 network가 몇개 필요한지, subnet된 하나의 network에 몇개의 IP주소를 할당해야 하는지 고려해야 한다. </p>
+<ul>
+<li>좋은 네트워크 설계란 IP주소를 여유있게 보급해줄 수 있는 사설IP대역으로 네트워크 설계 </li>
+</ul>
+<h2 id="공인-IP와-사설-IP"><a href="#공인-IP와-사설-IP" class="headerlink" title="공인 IP와 사설 IP"></a>공인 IP와 사설 IP</h2><ul>
+<li>공인IP : 전세계에서 유일해야 하는 식별자 </li>
+<li>사설IP : NAT(Network address translation) 를 사용해서 특정 네트워크내에서만 유일한 IP주소 </li>
+</ul>
+<p>예를 들면 가정용 공유기에 NAT process가 돌아가고 있어서 공유기 내부망에서는 각각의 단말기가 유일한 IP주소를 가지고 있음 </p>
+<p>한가지 주의할점은 다른 기관에서 사용하는 공인IP주소를 회사 내부망에서 사용할 경우에는  같은 네트워크에 존재하는 것으로 인식하고 해당 공인IP에는 접속이 불가능해짐을 주의해야 한다. </p>
+</div><!--!--></article></div><!--!--><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script><script>var gitalk = new Gitalk({
+            id: "887fd7a4c5c13ba732f23aea32509666",
+            repo: "gittalk",
+            owner: "devcs96",
+            clientID: "ad3debd03c0e5f289948",
+            clientSecret: "471b03d4771d8a3467d95e33fde1e2d8804d5da8",
+            admin: ["devcs96"],
+            createIssueManually: false,
+            distractionFreeMode: false,
+            perPage: 10,
+            pagerDirection: "last",
+            
+            
+            enableHotKey: true,
+            
+        })
+        gitalk.render('comment-container')</script></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2022/02/05/2022-02-05-Item54/"><span class="level-item">Item54. null이 아닌 빈 collection 이나 배열을 반환하라</span><i class="level-item fas fa-chevron-right"></i></a></div></nav></div><div class="column column-left is-2-tablet is-2-desktop is-2-widescreen  order-1"><!--!--><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">Categories</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/Computer-Science/"><span class="level-start"><span class="level-item">Computer Science</span></span><span class="level-end"><span class="level-item tag">17</span></span></a><ul><li><a class="level is-mobile" href="/categories/Computer-Science/Algorithm/"><span class="level-start"><span class="level-item">Algorithm</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/Computer-Science/Data-Structure/"><span class="level-start"><span class="level-item">Data Structure</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Computer-Science/Database/"><span class="level-start"><span class="level-item">Database</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/Computer-Science/Network/"><span class="level-start"><span class="level-item">Network</span></span><span class="level-end"><span class="level-item tag">4</span></span></a><ul><li><a class="level is-mobile" href="/categories/Computer-Science/Network/IT-%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A5%BC-%EC%9C%84%ED%95%9C-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EC%9E%85%EB%AC%B8/"><span class="level-start"><span class="level-item">IT 엔지니어를 위한 네트워크 입문</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Computer-Science/OS/"><span class="level-start"><span class="level-item">OS</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Design-Pattern/"><span class="level-start"><span class="level-item">Design Pattern</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/Infrastructure/"><span class="level-start"><span class="level-item">Infrastructure</span></span><span class="level-end"><span class="level-item tag">1</span></span></a><ul><li><a class="level is-mobile" href="/categories/Infrastructure/Kubernetes/"><span class="level-start"><span class="level-item">Kubernetes</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Java/"><span class="level-start"><span class="level-item">Java</span></span><span class="level-end"><span class="level-item tag">59</span></span></a><ul><li><a class="level is-mobile" href="/categories/Java/Effective-Java-3-E/"><span class="level-start"><span class="level-item">Effective Java 3/E</span></span><span class="level-end"><span class="level-item tag">53</span></span></a></li><li><a class="level is-mobile" href="/categories/Java/Jpa/"><span class="level-start"><span class="level-item">Jpa</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Java/Junit/"><span class="level-start"><span class="level-item">Junit</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Java/Jvm/"><span class="level-start"><span class="level-item">Jvm</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Javascript/"><span class="level-start"><span class="level-item">Javascript</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/Nodejs/"><span class="level-start"><span class="level-item">Nodejs</span></span><span class="level-end"><span class="level-item tag">1</span></span></a><ul><li><a class="level is-mobile" href="/categories/Nodejs/express/"><span class="level-start"><span class="level-item">express</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/kotlin/"><span class="level-start"><span class="level-item">kotlin</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/spring/"><span class="level-start"><span class="level-item">spring</span></span><span class="level-end"><span class="level-item tag">18</span></span></a><ul><li><a class="level is-mobile" href="/categories/spring/Batch/"><span class="level-start"><span class="level-item">Batch</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/spring/Core-Concept/"><span class="level-start"><span class="level-item">Core Concept</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/spring/Design-Pattern/"><span class="level-start"><span class="level-item">Design Pattern</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/spring/Jpa/"><span class="level-start"><span class="level-item">Jpa</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/spring/%ED%86%A0%EB%B9%84%EC%9D%98-spring/"><span class="level-start"><span class="level-item">토비의 spring</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%EA%B0%9C%EB%B0%9C-%EC%83%81%EC%8B%9D/"><span class="level-start"><span class="level-item">개발 상식</span></span><span class="level-end"><span class="level-item tag">2</span></span></a><ul><li><a class="level is-mobile" href="/categories/%EA%B0%9C%EB%B0%9C-%EC%83%81%EC%8B%9D/Git/"><span class="level-start"><span class="level-item">Git</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-02-06T09:45:58.000Z">2022-02-06</time></p><p class="title"><a href="/2022/02/06/2022-02-06-network-ch03/">네트워크 통신하기</a></p><p class="categories"><a href="/categories/Computer-Science/">Computer Science</a> / <a href="/categories/Computer-Science/Network/">Network</a> / <a href="/categories/Computer-Science/Network/IT-%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A5%BC-%EC%9C%84%ED%95%9C-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EC%9E%85%EB%AC%B8/">IT 엔지니어를 위한 네트워크 입문</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-02-05T03:21:00.000Z">2022-02-05</time></p><p class="title"><a href="/2022/02/05/2022-02-05-Item54/">Item54. null이 아닌 빈 collection 이나 배열을 반환하라</a></p><p class="categories"><a href="/categories/Java/">Java</a> / <a href="/categories/Java/Effective-Java-3-E/">Effective Java 3/E</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-02-03T10:02:45.000Z">2022-02-03</time></p><p class="title"><a href="/2022/02/03/2022-02-03-Item53/">Item53. 가변인수는 신중히 사용하라</a></p><p class="categories"><a href="/categories/Java/">Java</a> / <a href="/categories/Java/Effective-Java-3-E/">Effective Java 3/E</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-02-01T15:29:37.000Z">2022-02-02</time></p><p class="title"><a href="/2022/02/02/2022-02-02-network-ch02/">네트워크 연결과 구성요소</a></p><p class="categories"><a href="/categories/Computer-Science/">Computer Science</a> / <a href="/categories/Computer-Science/Network/">Network</a> / <a href="/categories/Computer-Science/Network/IT-%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A5%BC-%EC%9C%84%ED%95%9C-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EC%9E%85%EB%AC%B8/">IT 엔지니어를 위한 네트워크 입문</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-01-31T07:11:22.000Z">2022-01-31</time></p><p class="title"><a href="/2022/01/31/2022-01-31-network-ch01/">OSI 7 계층과 TCP/IP</a></p><p class="categories"><a href="/categories/Computer-Science/">Computer Science</a> / <a href="/categories/Computer-Science/Network/">Network</a> / <a href="/categories/Computer-Science/Network/IT-%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A5%BC-%EC%9C%84%ED%95%9C-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EC%9E%85%EB%AC%B8/">IT 엔지니어를 위한 네트워크 입문</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">Archives</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2022/02/"><span class="level-start"><span class="level-item">February 2022</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/01/"><span class="level-start"><span class="level-item">January 2022</span></span><span class="level-end"><span class="level-item tag">42</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/12/"><span class="level-start"><span class="level-item">December 2021</span></span><span class="level-end"><span class="level-item tag">27</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/11/"><span class="level-start"><span class="level-item">November 2021</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/08/"><span class="level-start"><span class="level-item">August 2021</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/07/"><span class="level-start"><span class="level-item">July 2021</span></span><span class="level-end"><span class="level-item tag">22</span></span></a></li></ul></div></div></div><!--!--></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
