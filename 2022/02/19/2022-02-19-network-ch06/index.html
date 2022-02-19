@@ -1,9 +1,6 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>4계층 장비 (로드 밸런서 / 방화벽) - devcs</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="devcs"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="devcs"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="4계층 장비의 특징 4계층 장비(세션 장비)는 통신의 방향성이나 순서와 같은 통신 전반에 관한 관리가 필요하는데, 이러한 정보를 세션 테이블이라는 공간에 담아 관리한다.   세션 정보는 세션 테이블에 남아 있는 라이프 타임이 존재한다.    로드 밸런서 서버의 부하를 분산시키기 위한 장비   로드 밸런서가 서비스에 사용되는 대표 IP주소를 가지고, 그 밑에"><meta property="og:type" content="blog"><meta property="og:title" content="4계층 장비 (로드 밸런서 / 방화벽)"><meta property="og:url" content="http://example.com/2022/02/19/2022-02-19-network-ch06/"><meta property="og:site_name" content="devcs"><meta property="og:description" content="4계층 장비의 특징 4계층 장비(세션 장비)는 통신의 방향성이나 순서와 같은 통신 전반에 관한 관리가 필요하는데, 이러한 정보를 세션 테이블이라는 공간에 담아 관리한다.   세션 정보는 세션 테이블에 남아 있는 라이프 타임이 존재한다.    로드 밸런서 서버의 부하를 분산시키기 위한 장비   로드 밸런서가 서비스에 사용되는 대표 IP주소를 가지고, 그 밑에"><meta property="og:locale" content="en_US"><meta property="og:image" content="http://example.com/images/network-ch06-01.jpg"><meta property="article:published_time" content="2022-02-19T08:13:16.000Z"><meta property="article:modified_time" content="2022-02-19T08:29:29.896Z"><meta property="article:author" content="kcs"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/images/network-ch06-01.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2022/02/19/2022-02-19-network-ch06/"},"headline":"4계층 장비 (로드 밸런서 / 방화벽)","image":["http://example.com/images/network-ch06-01.jpg"],"datePublished":"2022-02-19T08:13:16.000Z","dateModified":"2022-02-19T08:29:29.896Z","author":{"@type":"Person","name":"kcs"},"publisher":{"@type":"Organization","name":"devcs","logo":{"@type":"ImageObject"}},"description":"4계층 장비의 특징 4계층 장비(세션 장비)는 통신의 방향성이나 순서와 같은 통신 전반에 관한 관리가 필요하는데, 이러한 정보를 세션 테이블이라는 공간에 담아 관리한다.   세션 정보는 세션 테이블에 남아 있는 라이프 타임이 존재한다.    로드 밸런서 서버의 부하를 분산시키기 위한 장비   로드 밸런서가 서비스에 사용되는 대표 IP주소를 가지고, 그 밑에"}</script><link rel="canonical" href="http://example.com/2022/02/19/2022-02-19-network-ch06/"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/rainbow.css"><link rel="preconnect" href="https://fonts.gstatic.com"><link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400&amp;family=Roboto" rel="stylesheet"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><link id="dark" rel="stylesheet" href="/css/custom.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">devcs</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/">🌙</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/devcs96"><i class="fab fa-github"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-9-tablet is-9-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-02-19T08:13:16.000Z" title="2022. 2. 19. 오후 5:13:16">2022-02-19</time></span><span class="level-item">Updated&nbsp;<time dateTime="2022-02-19T08:29:29.896Z" title="2022. 2. 19. 오후 5:29:29">2022-02-19</time></span><span class="level-item"><a class="link-muted" href="/categories/Computer-Science/">Computer Science</a><span> / </span><a class="link-muted" href="/categories/Computer-Science/Network/">Network</a><span> / </span><a class="link-muted" href="/categories/Computer-Science/Network/IT-%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A5%BC-%EC%9C%84%ED%95%9C-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EC%9E%85%EB%AC%B8/">IT 엔지니어를 위한 네트워크 입문</a></span><span class="level-item">a minute read (About 191 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">4계층 장비 (로드 밸런서 / 방화벽)</h1><div class="content"><h2 id="4계층-장비의-특징"><a href="#4계층-장비의-특징" class="headerlink" title="4계층 장비의 특징"></a>4계층 장비의 특징</h2><ul>
-<li><p>4계층 장비(세션 장비)는 통신의 방향성이나 순서와 같은 통신 전반에 관한 관리가 필요하는데, 이러한 정보를 <strong>세션 테이블</strong>이라는 공간에 담아 관리한다. </p>
-</li>
-<li><p>세션 정보는 세션 테이블에 남아 있는 라이프 타임이 존재한다. </p>
-</li>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>4계층 장비 (로드 밸런서 / 방화벽) - devcs</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="devcs"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="devcs"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="4계층 장비의 특징 4계층 장비(세션 장비)는 통신의 방향성이나 순서와 같은 통신 전반에 관한 관리가 필요하는데, 이러한 정보를 세션 테이블이라는 공간에 담아 관리한다.     로드 밸런서 서버의 부하를 분산시키기 위한 장비   로드 밸런서가 서비스에 사용되는 대표 IP주소를 가지고, 그 밑에 실제 서버들의 실제 IP주소로 요청을 전달한다.   WAS뿐만아"><meta property="og:type" content="blog"><meta property="og:title" content="4계층 장비 (로드 밸런서 / 방화벽)"><meta property="og:url" content="http://example.com/2022/02/19/2022-02-19-network-ch06/"><meta property="og:site_name" content="devcs"><meta property="og:description" content="4계층 장비의 특징 4계층 장비(세션 장비)는 통신의 방향성이나 순서와 같은 통신 전반에 관한 관리가 필요하는데, 이러한 정보를 세션 테이블이라는 공간에 담아 관리한다.     로드 밸런서 서버의 부하를 분산시키기 위한 장비   로드 밸런서가 서비스에 사용되는 대표 IP주소를 가지고, 그 밑에 실제 서버들의 실제 IP주소로 요청을 전달한다.   WAS뿐만아"><meta property="og:locale" content="en_US"><meta property="og:image" content="http://example.com/images/network-ch06-01.jpg"><meta property="og:image" content="http://example.com/images/network-ch06-02.jpg"><meta property="og:image" content="http://example.com/images/network-ch06-03.jpg"><meta property="article:published_time" content="2022-02-19T08:13:16.000Z"><meta property="article:modified_time" content="2022-02-19T15:23:42.949Z"><meta property="article:author" content="kcs"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/images/network-ch06-01.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2022/02/19/2022-02-19-network-ch06/"},"headline":"4계층 장비 (로드 밸런서 / 방화벽)","image":["http://example.com/images/network-ch06-01.jpg","http://example.com/images/network-ch06-02.jpg","http://example.com/images/network-ch06-03.jpg"],"datePublished":"2022-02-19T08:13:16.000Z","dateModified":"2022-02-19T15:23:42.949Z","author":{"@type":"Person","name":"kcs"},"publisher":{"@type":"Organization","name":"devcs","logo":{"@type":"ImageObject"}},"description":"4계층 장비의 특징 4계층 장비(세션 장비)는 통신의 방향성이나 순서와 같은 통신 전반에 관한 관리가 필요하는데, 이러한 정보를 세션 테이블이라는 공간에 담아 관리한다.     로드 밸런서 서버의 부하를 분산시키기 위한 장비   로드 밸런서가 서비스에 사용되는 대표 IP주소를 가지고, 그 밑에 실제 서버들의 실제 IP주소로 요청을 전달한다.   WAS뿐만아"}</script><link rel="canonical" href="http://example.com/2022/02/19/2022-02-19-network-ch06/"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/rainbow.css"><link rel="preconnect" href="https://fonts.gstatic.com"><link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400&amp;family=Roboto" rel="stylesheet"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><link id="dark" rel="stylesheet" href="/css/custom.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">devcs</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/">🌙</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/devcs96"><i class="fab fa-github"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-9-tablet is-9-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-02-19T08:13:16.000Z" title="2022. 2. 19. 오후 5:13:16">2022-02-19</time></span><span class="level-item">Updated&nbsp;<time dateTime="2022-02-19T15:23:42.949Z" title="2022. 2. 20. 오전 12:23:42">2022-02-20</time></span><span class="level-item"><a class="link-muted" href="/categories/Computer-Science/">Computer Science</a><span> / </span><a class="link-muted" href="/categories/Computer-Science/Network/">Network</a><span> / </span><a class="link-muted" href="/categories/Computer-Science/Network/IT-%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A5%BC-%EC%9C%84%ED%95%9C-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EC%9E%85%EB%AC%B8/">IT 엔지니어를 위한 네트워크 입문</a></span><span class="level-item">14 minutes read (About 2147 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">4계층 장비 (로드 밸런서 / 방화벽)</h1><div class="content"><h2 id="4계층-장비의-특징"><a href="#4계층-장비의-특징" class="headerlink" title="4계층 장비의 특징"></a>4계층 장비의 특징</h2><ul>
+<li>4계층 장비(세션 장비)는 통신의 방향성이나 순서와 같은 통신 전반에 관한 관리가 필요하는데, 이러한 정보를 <strong>세션 테이블</strong>이라는 공간에 담아 관리한다.   </li>
 </ul>
 <h2 id="로드-밸런서"><a href="#로드-밸런서" class="headerlink" title="로드 밸런서"></a>로드 밸런서</h2><ul>
 <li><p>서버의 부하를 분산시키기 위한 장비 </p>
@@ -12,8 +9,130 @@
 </li>
 <li><p>WAS뿐만아니라 FWLB(FireWall Load Balancing) , VPNLB(VPN Load Balancing) 와 같이 다양한 서비스에 사용될 수 있다. </p>
 </li>
+<li><p>시스템 Scale Out시 사용 </p>
+</li>
 </ul>
+<p>(* Scale up : 메모리,cpu와 같은 하드웨어 리소스의 성능을 높임 / Scale out : 같은 리소스를 가진 시스템을 여러개 병렬로 배치 )</p>
+<div style="width:600px; margin:0 auto;">
+
 <p><img src="/images/network-ch06-01.jpg"></p>
+</div>
+
+<p>로드밸런서는 동작하는 계층에 따라 4,7계층으로 나뉜다.</p>
+<ul>
+<li>L4 로드 밸런싱은 일반적인 로드 밸런서가 동작하는 방식으로 , 4계층 헤더 정보(TCP,UDP)를 기반으로 로드 밸런싱을 수행한다.</li>
+<li>L7 로드 밸런싱 application 계층의 프로토콜 (HTTP,FTP,SMTP)을 기반으로 로드 밸런싱을 수행한다. </li>
+<li>L7 로드 밸런서를 ADC(application delivery controller) 라고 부르며, proxy 역할을 수행하며,  Nginx 의 reverse proxy와 유사한 기능을 수행한다.  (<a target="_blank" rel="noopener" href="https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/">https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/</a>)</li>
+</ul>
+<p>(* Reverse proxy : 외부에서 내부 서버가 제공하는 서비스 접근시, proxy 서버를 먼저 거치고 내부서버를 들어오는 방식)</p>
+<ul>
+<li>AWS 에서는 계층별로 L4,L7 로드 밸런싱을 수행해주는 컴포넌트를 제공한다.</li>
+<li>NLB(Network Load Balaner) == L4 로드 밸런싱 / ALB(Application Load Balancer) == L7 로드 밸런싱 </li>
+</ul>
+<h2 id="L4-스위치"><a href="#L4-스위치" class="headerlink" title="L4 스위치"></a>L4 스위치</h2><ul>
+<li><p>4계층에서 동작하는 로드 밸런서 기능이 있는 스위치로 여러개의 포트를 가지고 있다.</p>
+</li>
+<li><p>SW 형태의 로드 밸런서도 있지만, 다양한 네트워크 구성이 가능한 스위치형 로드 밸런서가 가장 대중화되어 있다. </p>
+</li>
+<li><p>L4 스위치가 동작하기 위해 필요한 설정은 다음과 같다</p>
+</li>
+</ul>
+<ol>
+<li>가상 서버 : 사용자가 바라보는 서비스</li>
+<li>가상 IP  : 사용자가 접근해야하는 서비스의 IP주소</li>
+<li>리얼 서버 : 실제 서비스를 수행하는 서버</li>
+<li>리얼 IP : 리얼 서버의 IP 주소 </li>
+</ol>
+<p>L4스위치는 사용자가 가상 IP주소로 접근하였을때 이를 리얼 IP주소에 대한 요청으로 변경해주는 역할을 한다. </p>
+<span id="more"></span>
+
+<h2 id="ADC-Application-Delivery-COntroller"><a href="#ADC-Application-Delivery-COntroller" class="headerlink" title="ADC (Application Delivery COntroller)"></a>ADC (Application Delivery COntroller)</h2><ul>
+<li>application 계층에서 동작하는 로드 밸런서</li>
+<li>proxy로 기능하며, 실제 서버에 요청되기 전에 부하 분산, 정보 수정 및 필터링 수행 </li>
+<li>대부분의 ADC는 4,7계층 로드 밸런싱을 함께 제공하고, FailOver(장애극복 기능)과 redirection 기능, 캐싱 , 인코딩 변환 , 압축 기능 들을 제공한다. </li>
+</ul>
+<h2 id="L4스위치와-ADC의-차이점"><a href="#L4스위치와-ADC의-차이점" class="headerlink" title="L4스위치와 ADC의 차이점"></a>L4스위치와 ADC의 차이점</h2><ul>
+<li>L4 스위치는 TCP,UDP정보를 기반으로 부하 분산 및 TCP 최적화 (Connection pooling), 보안기능을 제공함 </li>
+<li>ADC는 application 프로토콜 정보를 기반으로 application내용에 대한 부하 분산, redirection 기능 , 정적 콘텐츠 캐싱 기능 , 컨텐츠 압축 기능 , 암복호화 기능(SSL endpoint로서 역할)을 제공함 </li>
+</ul>
+<h2 id="방화벽"><a href="#방화벽" class="headerlink" title="방화벽"></a>방화벽</h2><ul>
+<li><p>네트워크 중간에 위치해 해당 장비를 통과하는 트래픽을 사전에 주어진 정책 조건에 맞추어 허용하거나 차단하는 장비 </p>
+</li>
+<li><p>세션을 인지,관리하는 SPI(Stateful Packet Inspect)엔진을 기반으로 동작하는 장비를 방화벽이라고 부른다 </p>
+</li>
+<li><p>세션 테이블을 사용하는 경우  : 패킷이 외부로 나갈떄 세션 정보를 세션 테이블에 저장하고, 패킷이 들어올때 내부 사용자에 대한 응답인지, 외부에서 처음 온 요청인지 판단 </p>
+</li>
+<li><p>세션 테이블과 같은 공간이 없어 세션의 방향성을 파악하지 못한 경우 : 양방향 정책 설정 </p>
+</li>
+</ul>
+<h2 id="4계층-장비를-통과할때의-유의점"><a href="#4계층-장비를-통과할때의-유의점" class="headerlink" title="4계층 장비를 통과할때의 유의점"></a>4계층 장비를 통과할때의 유의점</h2><h2 id="1-세션-테이블-유지-세션-정보-동기화"><a href="#1-세션-테이블-유지-세션-정보-동기화" class="headerlink" title="1. 세션 테이블 유지, 세션 정보 동기화"></a>1. 세션 테이블 유지, 세션 정보 동기화</h2><ul>
+<li>종단 장비에서 통신을 시작하면 세션 장비는 해당 세션 상태를 세션 테이블에 기록하고 일정시간 동안 메모리에 유지</li>
+<li>application 타임아웃값보다 세션 장비의 세션 timeout값이 짧으면 세션장비는 세션 테이블에 세션이 없으므로 , SYN이 아닌 ACK로 들어온 패킷은 차단한다.</li>
+</ul>
+<p>이러한 문제를 해결하기 위해서 세션장비와 application에서 적용할 수 있는 설정이 존재 </p>
+<ul>
+<li>세션 운영자 입장에서는 다음과 같은 방법이 있다.</li>
+</ul>
+<ol>
+<li>세션 만료 시간을 증가시키는 방법</li>
+<li>세션 만료 시간은 유지하고, 중간에 ack패킷을 차단하지 않도록 수정하는 방법 =&gt; 보안 취약점을 증가시키므로 지양 </li>
+<li>세션 장비에서 세션 타임아웃 시 양 단말에 TCP 헤더의 RST 플래그를 1로 설정해 양 단말에 전송하여 세션을 끊는 방법 </li>
+</ol>
+<p>개발자 입장에서는 다음과 같은 방법이 있다</p>
+<ol>
+<li>application 에서 주기적인 더미 패킷 발생 </li>
+</ol>
+<h2 id="2-경로-비대칭-문제"><a href="#2-경로-비대칭-문제" class="headerlink" title="2. 경로 비대칭 문제"></a>2. 경로 비대칭 문제</h2><p>네트워크 안정성을 높이기 위해 네트워크 회선과 장비를 이중화한다. 이때 패킷이 지나는 경로가 2개 이상이므로, 인바운드 패킷과 아웃바운드 패킷의 경로가 다를 수 있음</p>
+<ul>
+<li>대칭 경로 : 인바운드 패킷과 아웃바운드 패킷이 같은 세션 장비를 통과</li>
+<li>비대칭 경로 : 인바운드 패킷과 아웃바운드 패킷아 다른 세션 장비를 통과</li>
+</ul>
+<p>비대칭 경로의 경우 세션 테이블에 정보가 없으므로 방화벽에서 패킷 차단하는 등 정상적인 서비스가 수행되지 않는다</p>
+<h2 id="경로-비대칭-문제-해결-방법"><a href="#경로-비대칭-문제-해결-방법" class="headerlink" title="경로 비대칭 문제 해결 방법"></a>경로 비대칭 문제 해결 방법</h2><ol>
+<li>세션 장비간 세션 테이블을 동기화하는 방법 </li>
+</ol>
+<ul>
+<li>세션 동기화 시간보다 패킷응답시간이 빠르면 방화벽에 막히므로, 패킷 응답시간이 긴 경우에 사용가능 </li>
+</ul>
+<ol start="2">
+<li>세션 장비에서 패킷 경로를 보정하는 방법</li>
+</ol>
+<p>인바운드 패킷이 통과하지 않았는데, 아웃바운드 패킷이 들어온 경우 다른 세션 장비쪽으로 경로를 보정하여 강제로 대칭경로를 만들어준다.<br>강제로 다른 방화벽으로 패킷을 보내므로 방화벽 간 통신용 링크가 필요하고, MAC rewriting , tunneling 기법으로 경로 보정 </p>
+<h2 id="3-하나의-통신에-2개-이상의-세션이-사용되는-경우"><a href="#3-하나의-통신에-2개-이상의-세션이-사용되는-경우" class="headerlink" title="3. 하나의 통신에 2개 이상의 세션이 사용되는 경우"></a>3. 하나의 통신에 2개 이상의 세션이 사용되는 경우</h2><ul>
+<li>세션장비에서 두 세션 중 한 세션만 끊긴 경우 통신이 하지 못할 수도 있음. </li>
+<li>하나의 통신에 2개 이상의 세션이 사용되는 대표적인 예로 FTP protocol은 데이터를 전송하는 data protocol과 세션을 제어하는 control protocol이 분리되어 있고, active 모드와 passive 모드가 존재한다,</li>
+</ul>
+<div style="width:600px; height=400px; margin:0 auto;">
+
+<p><img src="/images/network-ch06-02.jpg"></p>
+</div>
+
+<ul>
+<li>default 동작방식은 active모드로 명령어를 전달하는 control protocol과 데이터를 전달하는 데이터 protocol이 분리되어 있고, 방향도 반대로 동작한다. </li>
+</ul>
+<ol>
+<li>Client가 FTP서버에서 데이터 수신용 포트를 알림</li>
+<li>FTP서버가 데이터 수신용 포트로 송신하겠다고 알림</li>
+<li>해당 X번 포트로 FTP서버가 송신 </li>
+</ol>
+<p>active 모드 사용시에는 x번 포트에 대해 방화벽을 열어주어야 하고, NAT의 경우 ALG(application layer gateway)라는 별도의 기능 필요</p>
+<ul>
+<li>passive 모드는 이와 반대로 control protocl 과 data protocol의 방향이 모두 client에서 서버 방향이다. </li>
+</ul>
+<div style="width:600px; height=400px; margin:0 auto;">
+
+<p><img src="/images/network-ch06-03.jpg"></p>
+</div>
+
+<ol>
+<li>Client는 FTP서버에게 Passive mode 사용알림</li>
+<li>FTP서버는 데이터 송신용 포트번호을 client에게 알림</li>
+<li>Client가 해당 포트번호로 데이터 요청 </li>
+</ol>
+<p>passive 모드 사용시에는 client는 별도의 설정이 필요없고, 단지 서버쪽에서 데이터 다운로드를 위한 추가적인 포트를 열어주면 된다. </p>
+<h3 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://madplay.github.io/post/ftp-active-passive">https://madplay.github.io/post/ftp-active-passive</a></li>
+</ul>
 </div><!--!--></article></div><!--!--><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script><script>var gitalk = new Gitalk({
             id: "fbe6e85c110688b265bd7d681b27a0b6",
             repo: "gittalk",

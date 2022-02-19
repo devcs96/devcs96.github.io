@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>3계층 장비 (라우터,L3 스위치) - devcs</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="devcs"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="devcs"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="Router 역할Router는 크게 아래와 같은 3가지 역할을 갖는다.  경로 지정     Router는 최적의 경로를 얻어서 Routing table에 저장하고, 패킷이 Router로 들어오면 도착지 IP주소와 Routing table을 비교해 최적의 경로로 패킷을 내보낸다.    브로드캐스트 컨트롤     패킷의 목적지 주소가 Rotuing table에"><meta property="og:type" content="blog"><meta property="og:title" content="3계층 장비 (라우터,L3 스위치)"><meta property="og:url" content="http://example.com/2022/02/16/2022-02-16-network-ch05/"><meta property="og:site_name" content="devcs"><meta property="og:description" content="Router 역할Router는 크게 아래와 같은 3가지 역할을 갖는다.  경로 지정     Router는 최적의 경로를 얻어서 Routing table에 저장하고, 패킷이 Router로 들어오면 도착지 IP주소와 Routing table을 비교해 최적의 경로로 패킷을 내보낸다.    브로드캐스트 컨트롤     패킷의 목적지 주소가 Rotuing table에"><meta property="og:locale" content="en_US"><meta property="og:image" content="http://example.com/img/og_image.png"><meta property="article:published_time" content="2022-02-16T13:56:41.000Z"><meta property="article:modified_time" content="2022-02-17T15:16:50.223Z"><meta property="article:author" content="kcs"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2022/02/16/2022-02-16-network-ch05/"},"headline":"3계층 장비 (라우터,L3 스위치)","image":["http://example.com/img/og_image.png"],"datePublished":"2022-02-16T13:56:41.000Z","dateModified":"2022-02-17T15:16:50.223Z","author":{"@type":"Person","name":"kcs"},"publisher":{"@type":"Organization","name":"devcs","logo":{"@type":"ImageObject"}},"description":"Router 역할Router는 크게 아래와 같은 3가지 역할을 갖는다.  경로 지정     Router는 최적의 경로를 얻어서 Routing table에 저장하고, 패킷이 Router로 들어오면 도착지 IP주소와 Routing table을 비교해 최적의 경로로 패킷을 내보낸다.    브로드캐스트 컨트롤     패킷의 목적지 주소가 Rotuing table에"}</script><link rel="canonical" href="http://example.com/2022/02/16/2022-02-16-network-ch05/"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/rainbow.css"><link rel="preconnect" href="https://fonts.gstatic.com"><link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400&amp;family=Roboto" rel="stylesheet"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><link id="dark" rel="stylesheet" href="/css/custom.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">devcs</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/">🌙</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/devcs96"><i class="fab fa-github"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-9-tablet is-9-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-02-16T13:56:41.000Z" title="2022. 2. 16. 오후 10:56:41">2022-02-16</time></span><span class="level-item">Updated&nbsp;<time dateTime="2022-02-17T15:16:50.223Z" title="2022. 2. 18. 오전 12:16:50">2022-02-18</time></span><span class="level-item"><a class="link-muted" href="/categories/Computer-Science/">Computer Science</a><span> / </span><a class="link-muted" href="/categories/Computer-Science/Network/">Network</a><span> / </span><a class="link-muted" href="/categories/Computer-Science/Network/IT-%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A5%BC-%EC%9C%84%ED%95%9C-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EC%9E%85%EB%AC%B8/">IT 엔지니어를 위한 네트워크 입문</a></span><span class="level-item">6 minutes read (About 958 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">3계층 장비 (라우터,L3 스위치)</h1><div class="content"><h2 id="Router-역할"><a href="#Router-역할" class="headerlink" title="Router 역할"></a>Router 역할</h2><p>Router는 크게 아래와 같은 3가지 역할을 갖는다.</p>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>3계층 장비 (라우터,L3 스위치) - devcs</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="devcs"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="devcs"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="Router 역할Router는 크게 아래와 같은 3가지 역할을 갖는다.  경로 지정     Router는 최적의 경로를 얻어서 Routing table에 저장하고, 패킷이 Router로 들어오면 도착지 IP주소와 Routing table을 비교해 최적의 경로로 패킷을 내보낸다.    브로드캐스트 컨트롤     패킷의 목적지 주소가 Rotuing table에"><meta property="og:type" content="blog"><meta property="og:title" content="3계층 장비 (라우터,L3 스위치)"><meta property="og:url" content="http://example.com/2022/02/16/2022-02-16-network-ch05/"><meta property="og:site_name" content="devcs"><meta property="og:description" content="Router 역할Router는 크게 아래와 같은 3가지 역할을 갖는다.  경로 지정     Router는 최적의 경로를 얻어서 Routing table에 저장하고, 패킷이 Router로 들어오면 도착지 IP주소와 Routing table을 비교해 최적의 경로로 패킷을 내보낸다.    브로드캐스트 컨트롤     패킷의 목적지 주소가 Rotuing table에"><meta property="og:locale" content="en_US"><meta property="og:image" content="http://example.com/images/network-ch05-01.jpg"><meta property="article:published_time" content="2022-02-16T13:56:41.000Z"><meta property="article:modified_time" content="2022-02-19T09:22:25.668Z"><meta property="article:author" content="kcs"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/images/network-ch05-01.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2022/02/16/2022-02-16-network-ch05/"},"headline":"3계층 장비 (라우터,L3 스위치)","image":["http://example.com/images/network-ch05-01.jpg"],"datePublished":"2022-02-16T13:56:41.000Z","dateModified":"2022-02-19T09:22:25.668Z","author":{"@type":"Person","name":"kcs"},"publisher":{"@type":"Organization","name":"devcs","logo":{"@type":"ImageObject"}},"description":"Router 역할Router는 크게 아래와 같은 3가지 역할을 갖는다.  경로 지정     Router는 최적의 경로를 얻어서 Routing table에 저장하고, 패킷이 Router로 들어오면 도착지 IP주소와 Routing table을 비교해 최적의 경로로 패킷을 내보낸다.    브로드캐스트 컨트롤     패킷의 목적지 주소가 Rotuing table에"}</script><link rel="canonical" href="http://example.com/2022/02/16/2022-02-16-network-ch05/"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/rainbow.css"><link rel="preconnect" href="https://fonts.gstatic.com"><link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400&amp;family=Roboto" rel="stylesheet"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><link id="dark" rel="stylesheet" href="/css/custom.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">devcs</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/">🌙</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/devcs96"><i class="fab fa-github"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-9-tablet is-9-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-02-16T13:56:41.000Z" title="2022. 2. 16. 오후 10:56:41">2022-02-16</time></span><span class="level-item">Updated&nbsp;<time dateTime="2022-02-19T09:22:25.668Z" title="2022. 2. 19. 오후 6:22:25">2022-02-19</time></span><span class="level-item"><a class="link-muted" href="/categories/Computer-Science/">Computer Science</a><span> / </span><a class="link-muted" href="/categories/Computer-Science/Network/">Network</a><span> / </span><a class="link-muted" href="/categories/Computer-Science/Network/IT-%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A5%BC-%EC%9C%84%ED%95%9C-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EC%9E%85%EB%AC%B8/">IT 엔지니어를 위한 네트워크 입문</a></span><span class="level-item">14 minutes read (About 2123 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">3계층 장비 (라우터,L3 스위치)</h1><div class="content"><h2 id="Router-역할"><a href="#Router-역할" class="headerlink" title="Router 역할"></a>Router 역할</h2><p>Router는 크게 아래와 같은 3가지 역할을 갖는다.</p>
 <ol>
 <li>경로 지정 </li>
 </ol>
@@ -42,6 +42,8 @@
 <ul>
 <li>TTL (Time To Live) : 3계층 IP헤더에는 TTL이라는 필드가 존재한다. 이 필드는 네트워크에 살아 있을 수 있는 시간(홉)을 제한하여 라우팅 루프 현상을 방지한다.<br>(* 라우팅 루프 현상 : 라우터간에 패킷이 무한히 핑퐁되는 현상 )</li>
 </ul>
+<span id="more"></span>
+
 <h2 id="Routing"><a href="#Routing" class="headerlink" title="Routing"></a>Routing</h2><ul>
 <li>Routing : 라우터가 경로를 얻는 방법</li>
 </ul>
@@ -72,7 +74,97 @@
 </li>
 <li><p>최적의 경로를 찾는 과정에서 얻은 원시 경로 정보를 저장하는 테이블을 topology table 이라고 하고, 최적의 경로를 저장하는 테이블을 routing table이라고 한다. </p>
 </li>
-<li><p><strong> 패킷을 보낼때는 전체 경로를 고려하지 않고, 다음 라우터까지만 최단 거리로 보낸다. (Hop-By-Hop Routing 방식) &lt;/strong mn&gt;</p>
+</ul>
+<strong> 
+
+<ul>
+<li>패킷을 보낼때는 전체 경로를 고려하지 않고, 다음 라우터까지만 최단 거리로 보낸다. (Hop-By-Hop Routing 방식)   </li>
+</ul>
+</strong>
+    
+
+<h2 id="Switching"><a href="#Switching" class="headerlink" title="Switching"></a>Switching</h2><ul>
+<li><p>패킷이 들어와 routing table을 참조하고 최적의 경로를 찾아 router 외부로 forwarding 하는 작업</p>
+</li>
+<li><p>longest prefix match : routing table에 가지고 있는 경로 정보 중 가장 가까운 경로를 선택한다. </p>
+</li>
+<li><p>longest prefix match 방식은 부하가 많이 걸려, 스위칭 작업을 캐싱해놓고 이어서 들어오는 패킷들은 캐시를 먼저 확인하고 없으면 routing table을 뒤지는 방향으로 최적화되어 있다. </p>
+</li>
+</ul>
+<h2 id="Routing-Switching-우선-순위"><a href="#Routing-Switching-우선-순위" class="headerlink" title="Routing, Switching 우선 순위"></a>Routing, Switching 우선 순위</h2><p>목적지 네트워크 정보가 동일한 서브넷을 가지는 경우 우선순위는 다음과 같다.</p>
+<ol>
+<li>Directed Connected</li>
+<li>Static Routing </li>
+<li>Dynamic Routing </li>
+</ol>
+<ul>
+<li><p>기본적인 우선순위는 위와 같이 정해져 있지만, 필요에 따라 관리자가 Router의 우선순위를 변경할 수 있는데 이러한 우선 순위를 AD(Administrative Distance , 관리거리) 라고 부른다. </p>
+</li>
+<li><p>만약 우선순위가 동일하다면 Cost(거리 비용) 값으로 우선순위를 선정 </p>
+</li>
+<li><p>Cost 우선순위까지 모두 동일하다면 ECMP(Equal-Cost Multi-Path) 방식으로 동일한 Cost 값을 가진 경로 값 정보를 모두 활용해 트래픽을 분산한다. </p>
+</li>
+</ul>
+<h2 id="Routing-설정-방법"><a href="#Routing-설정-방법" class="headerlink" title="Routing 설정 방법"></a>Routing 설정 방법</h2><ol>
+<li>Directed Connected</li>
+</ol>
+<ul>
+<li>router는 패킷을 받아 routing table을 확인하는데 목적지가 동일 네트워크 (directed connect)라면 L2 통신으로 목적지에 도달한다. </li>
+</ul>
+<ol start="2">
+<li>Static Routing </li>
+</ol>
+<ul>
+<li><p>사내 제한된 경로 정보를 static routing으로 처리하기는 쉬우나, 네트워크 규모가 큰 경우 routing 처리하기는 힘듦 (ISP가 직접 대형 라우터 운영하고, ISP가 운영하는 라우터에게 패킷 송신) </p>
+</li>
+<li><p>Default  routing : 대체경로가 없는 경우, 마지막 대체 경로로 default routing을 사용 ( = default gateway와 동일한 의미 ) 하며, 목적지 주소의 subnet mask가 모두 0인 static routing을 default routing 이라고 한다.</p>
+</li>
+</ul>
+<ol start="3">
+<li>Dynamic Routing </li>
+</ol>
+<ul>
+<li>SPoF와 같이 static routing으로 관리하기 복잡한 경우를 router끼리 경로 정보를 교환하도록 하여 관리<br>( *SPoF(Single Point Of Failure, 단일 장애점) : 한 요소에서 장얘발생시, 전체 시스템에서 장얘가 발생하는 지점 )</li>
+<li>Dynmaic Routing 내에서도 Router 간에 경로 정보를 교환하는 여러 protocol 존재 </li>
+</ul>
+<p><img src="/images/network-ch05-01.jpg"><br>(ref- <a target="_blank" rel="noopener" href="https://catsbi.oopy.io/225439bd-ec84-4e16-aeca-0dfcb9954ea6">https://catsbi.oopy.io/225439bd-ec84-4e16-aeca-0dfcb9954ea6</a>)</p>
+<h2 id="역할에-따른-분류"><a href="#역할에-따른-분류" class="headerlink" title="역할에 따른 분류"></a>역할에 따른 분류</h2><ul>
+<li><p>일반적으로 Routing protocol은 unicast routing protocol을 말한다.</p>
+</li>
+<li><p>인터넷에서는 AS(Autonomous System)이라는 자율 시스템이 존재하는데, ISP가 한개 이상의 AS를 운영한다.</p>
+</li>
+<li><p> IGP(interior gateway protocol) : AS내부에서 사용하는 routing protocol</p>
+</li>
+<li><p> EGP(exterior gateway protocol) : AS간에 통신에 사용하는 routing protocol </p>
+</li>
+<li><p> AS는 단지 최단거리보다는 ISP간 통신 비용에 따른 정책을 따른다. </p>
+</li>
+</ul>
+<h2 id="동작-원리에-따른-분류"><a href="#동작-원리에-따른-분류" class="headerlink" title="동작 원리에 따른 분류"></a>동작 원리에 따른 분류</h2><ul>
+<li>IGP routing protocol은 동작원리에 따라 Distance Vector , Link State 알고리즘을 사용한다. </li>
+<li>Distance vector 를 사용할 경우 BGP , Link state 를 사용할 경우 OSPF 프로토콜이 자주 사용된다. </li>
+</ul>
+<h2 id="Distance-Vector"><a href="#Distance-Vector" class="headerlink" title="Distance Vector"></a>Distance Vector</h2><ul>
+<li>인접한 Router에서 경로정보를 습득하는 routing protocol  ex) RIP,BGP  </li>
+<li>인접한 Router가 아닌 경로정보는 한단계 거쳐서 인접한 라우터를 통해 간접적으로 전달받는다. </li>
+<li>멀리 떨어진 라우터에 변경이 발생하면 동기화까지 다소 시간이 걸릴 수 있다는 단점이 존재함</li>
+</ul>
+<h2 id="Link-State"><a href="#Link-State" class="headerlink" title="Link State"></a>Link State</h2><ul>
+<li><p>Router에 연결된 Link 상태를 서로 교환하는 routing protocl  ex) OSPF</p>
+</li>
+<li><p>Link 상태를 교환해 topology database를 만들고, 이 정보를 다시 SPF(shortest path first) 알고리즘을 이용해 최단 경로 트리를 만든다 </p>
+</li>
+<li><p>distance vector는 이미 최적화된 routing table 교환하는데 비해 link state 알고리즘은 전체 네트워크의 링크 상태 정보를 받아 각자 처리하므로, 전체 네트워크 맵을 그리는데 유리하다.</p>
+<strong></li>
+<li><p>대신 리소스를 많이 사용한다는 단점이 있어 , 네트워크를 AREA단위로 분리하고, 분리된 AREA 내에서만 링크 상태 정보를 교환한다. (OSPF - AREA 개념 )</p>
+</li>
+<li><p>AREA 내부에서는 전체 링크 정보가 공유되지만, AREA 외부의 router간에는 가공된 routing table형태로 정보를 전달한다. </p>
+</strong></li>
+<li><p>AREA0라고 불리는 BackBone Area를 통해 모든 AREA가 연결된다. </p>
+</li>
+<li><p>Backbone AREA와 다른 AREA간에 연결을 위해서는 경계 라우터 (ABR,Area Border Router) 가 필요하다.</p>
+</li>
+<li><p>외부 routing domain을 AREA와 연결을 위해서는 외곽 라우터 (ASBR,Autonomous System Border Router)가 필요하다 </p>
 </li>
 </ul>
 </div><!--!--></article></div><!--!--><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script><script>var gitalk = new Gitalk({
