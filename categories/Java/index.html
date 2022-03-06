@@ -8,8 +8,12 @@
 
 <ul>
 <li>그외에 단점으로 검사 예외를 던지는 method는 Stream 안에서 직접 사용할 수 없다. </li>
-</ul></div><a class="article-more button is-small is-size-7" href="/2022/03/06/Item71/#more">Read more</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-03-06T07:46:53.000Z" title="2022. 3. 6. 오후 4:46:53">2022-03-06</time></span><span class="level-item">Updated&nbsp;<time dateTime="2022-03-06T08:34:51.979Z" title="2022. 3. 6. 오후 5:34:51">2022-03-06</time></span><span class="level-item"><a class="link-muted" href="/categories/Java/">Java</a><span> / </span><a class="link-muted" href="/categories/Java/Effective-Java-3-E/">Effective Java 3/E</a></span><span class="level-item">4 minutes read (About 589 words)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2022/03/06/Item70/">Item70. 복구할 수 있는 상황에는 검사 예외를, 프로그래밍 오류에는 런타임 예외를 사용하라</a></h1><div class="content"><p>-Java는 문제 상황을 알리는 타입 (Throwable)으로 3가지 ( 검사 예외, 런타임 예외 , 에러 ) 를 제공한다. </p>
+</ul></div><a class="article-more button is-small is-size-7" href="/2022/03/06/Item71/#more">Read more</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-03-06T07:46:53.000Z" title="2022. 3. 6. 오후 4:46:53">2022-03-06</time></span><span class="level-item">Updated&nbsp;<time dateTime="2022-03-06T10:03:32.467Z" title="2022. 3. 6. 오후 7:03:32">2022-03-06</time></span><span class="level-item"><a class="link-muted" href="/categories/Java/">Java</a><span> / </span><a class="link-muted" href="/categories/Java/Effective-Java-3-E/">Effective Java 3/E</a></span><span class="level-item">4 minutes read (About 589 words)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2022/03/06/Item70/">Item70. 복구할 수 있는 상황에는 검사 예외를, 프로그래밍 오류에는 런타임 예외를 사용하라</a></h1><div class="content"><p>-Java는 문제 상황을 알리는 타입 (Throwable)으로 3가지 ( 검사 예외, 런타임 예외 , 에러 ) 를 제공한다. </p>
+<div style="width:700px; height:500px">
+
 <p><img src="/images/Item70.png"></p>
+</div>
+
 <p>(ref- <a target="_blank" rel="noopener" href="https://butter-shower.tistory.com/87">https://butter-shower.tistory.com/87</a> )</p>
 <ul>
 <li><p>RuntimeException은 예외처리를 하지 않아도 컴파일 가능한 비검사형 예외이며, 이외 검사형 예외(ex) IllegalAccessException)은 예외 처리를 하지 않으면 컴파일 오류가 터지므로 꼭 처리해주어야 하는 예외이다. </p>
