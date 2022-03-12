@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>이중화 기술 - devcs</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="devcs"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="devcs"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="이중화 기술을 사용하는 목적 이중화를 하지 않았을때 SPoF (Single Point Of Failure , 단일 장애점) 문제가 발생할 수 있다, 인프라를 구성하는 요소가 복수 개 이상으로 인프라를 구성해 특정 인프라에 문제가 발생하더라도 이중화된 다른 인프라를 통해 서비스가 지속되도록 해준다.(Fault Tolerance 보장)    이중화의 목적 SP"><meta property="og:type" content="blog"><meta property="og:title" content="이중화 기술"><meta property="og:url" content="http://example.com/2022/03/12/network-ch12/"><meta property="og:site_name" content="devcs"><meta property="og:description" content="이중화 기술을 사용하는 목적 이중화를 하지 않았을때 SPoF (Single Point Of Failure , 단일 장애점) 문제가 발생할 수 있다, 인프라를 구성하는 요소가 복수 개 이상으로 인프라를 구성해 특정 인프라에 문제가 발생하더라도 이중화된 다른 인프라를 통해 서비스가 지속되도록 해준다.(Fault Tolerance 보장)    이중화의 목적 SP"><meta property="og:locale" content="en_US"><meta property="og:image" content="http://example.com/images/network-ch11-01.jpg"><meta property="og:image" content="http://example.com/images/network-ch11-02.jpg"><meta property="og:image" content="http://example.com/images/network-ch11-03.jpg"><meta property="og:image" content="http://example.com/images/network-ch11-04.jpg"><meta property="og:image" content="http://example.com/images/network-ch11-05.jpg"><meta property="og:image" content="http://example.com/images/network-ch11-06.jpg"><meta property="article:published_time" content="2022-03-12T04:55:27.000Z"><meta property="article:modified_time" content="2022-03-12T12:05:40.511Z"><meta property="article:author" content="kcs"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/images/network-ch11-01.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2022/03/12/network-ch12/"},"headline":"이중화 기술","image":["http://example.com/images/network-ch11-01.jpg","http://example.com/images/network-ch11-02.jpg","http://example.com/images/network-ch11-03.jpg","http://example.com/images/network-ch11-04.jpg","http://example.com/images/network-ch11-05.jpg","http://example.com/images/network-ch11-06.jpg"],"datePublished":"2022-03-12T04:55:27.000Z","dateModified":"2022-03-12T12:05:40.511Z","author":{"@type":"Person","name":"kcs"},"publisher":{"@type":"Organization","name":"devcs","logo":{"@type":"ImageObject"}},"description":"이중화 기술을 사용하는 목적 이중화를 하지 않았을때 SPoF (Single Point Of Failure , 단일 장애점) 문제가 발생할 수 있다, 인프라를 구성하는 요소가 복수 개 이상으로 인프라를 구성해 특정 인프라에 문제가 발생하더라도 이중화된 다른 인프라를 통해 서비스가 지속되도록 해준다.(Fault Tolerance 보장)    이중화의 목적 SP"}</script><link rel="canonical" href="http://example.com/2022/03/12/network-ch12/"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/rainbow.css"><link rel="preconnect" href="https://fonts.gstatic.com"><link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400&amp;family=Roboto" rel="stylesheet"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><link id="dark" rel="stylesheet" href="/css/custom.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><meta name="generator" content="Hexo 5.4.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">devcs</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/">🌙</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/devcs96"><i class="fab fa-github"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-9-tablet is-9-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-03-12T04:55:27.000Z" title="2022. 3. 12. 오후 1:55:27">2022-03-12</time></span><span class="level-item">Updated&nbsp;<time dateTime="2022-03-12T12:05:40.511Z" title="2022. 3. 12. 오후 9:05:40">2022-03-12</time></span><span class="level-item"><a class="link-muted" href="/categories/Computer-Science/">Computer Science</a><span> / </span><a class="link-muted" href="/categories/Computer-Science/Network/">Network</a><span> / </span><a class="link-muted" href="/categories/Computer-Science/Network/IT-%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A5%BC-%EC%9C%84%ED%95%9C-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EC%9E%85%EB%AC%B8/">IT 엔지니어를 위한 네트워크 입문</a></span><span class="level-item">20 minutes read (About 2985 words)</span></div></div><h1 class="title is-3 is-size-4-mobile">이중화 기술</h1><div class="content"><h2 id="이중화-기술을-사용하는-목적"><a href="#이중화-기술을-사용하는-목적" class="headerlink" title="이중화 기술을 사용하는 목적"></a>이중화 기술을 사용하는 목적</h2><ul>
+<li>이중화를 하지 않았을때 SPoF (Single Point Of Failure , 단일 장애점) 문제가 발생할 수 있다, 인프라를 구성하는 요소가 복수 개 이상으로 인프라를 구성해 특정 인프라에 문제가 발생하더라도 이중화된 다른 인프라를 통해 서비스가 지속되도록 해준다.(Fault Tolerance 보장)  </li>
+</ul>
+<h2 id="이중화의-목적"><a href="#이중화의-목적" class="headerlink" title="이중화의 목적"></a>이중화의 목적</h2><ul>
+<li>SPoF를 제거하여, 시스템의 고가용성 보장 ( Fault Tolerance )</li>
+<li>이중화 구성 방식은 Active-Active 또는 Active-Standby 형태로 구성된다. </li>
+<li>Active-Active로 구성시 이중화된 인프라에서 서비스 요청을 동시 처리할 수 있으므로, 처리 가능한 전체 용량이 증가하고, 장비간 네트워크 연결이나 회선의 대역폭이 증가한다. 증가된 인프라 용량을 기준으로 서비스시 장애가 발생하였을때 정상적인 서비스가 불가능해진다. </li>
+</ul>
+<h2 id="LACP-Link-Aggregation-Control-Protocol"><a href="#LACP-Link-Aggregation-Control-Protocol" class="headerlink" title="LACP (Link Aggregation Control Protocol)"></a>LACP (Link Aggregation Control Protocol)</h2><ul>
+<li>단일 스위치의 물리적인 포트 여러개를 하나의 논리적인 포트로 구성하여 대역폭을 확장시킴</li>
+</ul>
+<p>LACP 대역폭 확장을 통해 아래와 같은 기능이 제공된다. (IEEE 802.1AX-2008)</p>
+<ol>
+<li>링크 사용률 향상</li>
+<li>향상된 장애 회복 </li>
+</ol>
+<ul>
+<li>모든 물리 포트를 Active 상태로 사용한다 ( Active-Active 방식 )</li>
+<li>물리 네트워크 인터페이스 일부에서 장애가 생기더라도, 나머지 물리 인터페이스로 서비스를 유지해준다. </li>
+</ul>
+<p><img src="/images/network-ch11-01.jpg"></p>
+<h4 id="주의점"><a href="#주의점" class="headerlink" title="주의점"></a>주의점</h4><ol>
+<li>논리 인터페이스의 대역폭을 서비스에 필요한 전체 트래픽 기준으로 서비스 트래픽을 산정하면 안된다. </li>
+<li>물리 인터페이스간의 속도가 동일해야 한다. </li>
+</ol>
+<h2 id="LCAP-동작-방식"><a href="#LCAP-동작-방식" class="headerlink" title="LCAP 동작 방식"></a>LCAP 동작 방식</h2><ul>
+<li>LACPDU (LACP Data Unit)이라는 프레임을 사용하여, Muticast 통신방식으로 한 장비와 LACPDU 프레임을 주고받는다 (1:1 구성방식)</li>
+<li>만약 여러개의 장비 (N:M) 간 LACP를 구성하고자할떄는 별개의 프로토콜 필요(MC-LAG protocol )</li>
+</ul>
+<h2 id="LACP-모드"><a href="#LACP-모드" class="headerlink" title="LACP 모드"></a>LACP 모드</h2><ol>
+<li>Active Mode : LACPDU를 먼저 송신하고 상대방이 LACP로 구성된 경우 ,  LACP를 구성</li>
+<li>Passive Mode:  LACPDU를 송신하진 않지만, LACPDU를 수신받으면 응답해 LACP를 구성</li>
+</ol>
+<ul>
+<li>LACP를 구성한 모든 장비에서 LACPDU 프레임을 보내는게 아니라, 한쪽은 Active 한쪽은 Passive Mode로 설정해도 LACP가 구성된다. 단 두 장비 모두 Passive Mode 인 경우에는 당연히 LACP 연결이 되지 않는다. </li>
+<li>일반적으로 1~8개의 물리인터페이스를 LACP로 하나의 논리 인터페이스로 구성하지만 벤더에 따라 다름.</li>
+</ul>
+<h2 id="LACP와-PXE"><a href="#LACP와-PXE" class="headerlink" title="LACP와 PXE"></a>LACP와 PXE</h2><p><img src="/images/network-ch11-02.jpg"></p>
+<ul>
+<li><p>서버와 Active-Active 형태로 네트워크 인터페이스 이중화시에도 LACP 프로토콜이 사용된다. </p>
+</li>
+<li><p>서버 네트워크 인터페이스를 하나의 논리 포트로 묶는 과정을 Bonding 또는 Teaming이라고 부르며 OS에서 설정하게 됨. </p>
+</li>
+<li><p>LACP 설정은 본딩과 티밍에서 액티브-액티브로 사용하기 위한 옵션 설정임으로, 운영체제 설치 전에는 LACP를 사용할 수 없다. </p>
+</li>
+<li><p>서버가 OS를 설치하기 전은 LACP를 사용할 수 없음. 따라서 LACP 로 구성하려는 서버를 PXE로 OS 를 설치하고자 할때는 일반 인터페이스로 구성해 OS를 설치하고 LACP 설정을 다시 한 후 스위치 포트 설정을 다시 해야 함. </p>
+</li>
+<li><p>LACP protocol에 옵션을 주어서, OS 설치전에는 한개의 네트워크 인터페이스만 활성화, LACPDU 패킷을 수신하기 시작하면 두개의 네트워크 인터페이스를 활성화하여 LACP 로 구성할 수 있도록 옵션을 줄 수 있다. </p>
+</li>
+</ul>
+<div style="width:50%;">
+
+<table>
+<thead>
+<tr>
+<th>벤더</th>
+<th>기술명</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Cisco</td>
+<td>lacp suspend-individual</td>
+</tr>
+<tr>
+<td>Arista</td>
+<td>lacp fallback</td>
+</tr>
+<tr>
+<td>Extreme</td>
+<td>lacp fallback</td>
+</tr>
+<tr>
+<td>HP</td>
+<td>lacp edge-port</td>
+</tr>
+</tbody></table>
+</div>
+( PXE (Pre-Boot Environment) : 네트워크 인터페이스를 통해 컴퓨터를 부팅할 수 있게 해주는 환경 )
+
+<span id="more"></span>
+
+<h3 id="서버의-네트워크-이중화-설정"><a href="#서버의-네트워크-이중화-설정" class="headerlink" title="서버의 네트워크 이중화 설정"></a>서버의 네트워크 이중화 설정</h3><ul>
+<li>네트워크 인터페이스 이중화에 사용되는 기술은 운영체제별로 다르게 부른다. 서버 인터페이스를 이중화하면 네트워크 장비와 마찬가지로 하나의 논리 인터페이스가 생성되고, 이때 논리 인터페이스의 이름이 각 운영체제의 네트워크 이중화 기술의 기술명이다. </li>
+</ul>
+<ol>
+<li>윈도우 : team/teaming </li>
+<li>리눅스 : bond/bonding </li>
+</ol>
+<ul>
+<li>네트워크 장비의 LACP와 다르게 서버의 인터페이스 이중화는 AA 구성뿐 아니라 AS등 여러가지 동작모드를 선택할 수 있다. </li>
+</ul>
+<div style="width:70%;">
+
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>윈도우</th>
+<th>리눅스</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>기술명</td>
+<td>Teaming</td>
+<td>Bonding</td>
+</tr>
+<tr>
+<td>인터페이스명</td>
+<td>team</td>
+<td>bond</td>
+</tr>
+<tr>
+<td>동작명</td>
+<td>Switch Independent,LACP,Static Teaming</td>
+<td>round robin , Active-Standby , balance-xor , broadcast , LACP</td>
+</tr>
+</tbody></table>
+</div>
+
+
+<h2 id="Linux-Bonding-모드"><a href="#Linux-Bonding-모드" class="headerlink" title="Linux Bonding 모드"></a>Linux Bonding 모드</h2><ul>
+<li>Linux boding mode 는 0 ~ 4까지 있으며 주로 1(AS) , 4(AA) 모드가 사용된다. </li>
+</ul>
+<h3 id="CentOs에서-Boding-설정-방법"><a href="#CentOs에서-Boding-설정-방법" class="headerlink" title="CentOs에서 Boding 설정 방법"></a>CentOs에서 Boding 설정 방법</h3><ol>
+<li>네트워크 설정파일이 있는 디렉토리 이동</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /etc/sysconfig/network-scripts</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li> Bond 논리 인터페이스 파일을 생성</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ifcfg-bond0 </span></span><br><span class="line"></span><br><span class="line">DEVICE=bond0</span><br><span class="line">BOOTPROTO=none</span><br><span class="line">onBoot=yes</span><br><span class="line">BOOTPROTO=static</span><br><span class="line">IPADDR=10.10.10.11</span><br><span class="line">NETMASK=255.255.255.0</span><br><span class="line">GATEWAY=10.10.10.1</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>논리 인터페이스로 묶일 각각의 물리 인터페이스에도 Bond 설정 파일을 추가한다.</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#ifcfg-eth0 , ifcfg-eth1</span></span><br><span class="line">DEVICE=eth0</span><br><span class="line">BOOTPROTO=none</span><br><span class="line">onBOOT=yes</span><br><span class="line">MASTER=bond0</span><br><span class="line">SLAVE=yes</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>bonding 설정파일 위치로 이동해 속성을 변경한다.</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /etc/modprobe.d/</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># bonding.conf</span></span><br><span class="line"><span class="built_in">alias</span> bond0 bonding </span><br><span class="line">options bond0 mode=4 miiion=100</span><br><span class="line"><span class="comment">## mode : 본드 구성에 대한 모드 번호 4: lacp(AA)</span></span><br><span class="line"><span class="comment">## miion : bond로 묶인 링크를 몇 밀리초마다 확인할것인지 지정</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>miion=0으로 설정시 링크를 확인하지 않아, FailOver 보장되지 않음으로 꼭 설정필요 </li>
+<li>mode1으로 AA로 구성한다면 어떤 인터페이스가 Active 역할을 수행할지 Primary option으로 지정해두어야 한다.</li>
+</ul>
+<ol start="5">
+<li>리눅스 커널에 본드 모듈 적재</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">modprobe bonding </span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>네트워크 재시작</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service network restart </span><br></pre></td></tr></table></figure>
+
+<h2 id="MC-LAG-Multi-Chassis-Link-Aggregation-Group"><a href="#MC-LAG-Multi-Chassis-Link-Aggregation-Group" class="headerlink" title="MC-LAG (Multi-Chassis Link Aggregation Group)"></a>MC-LAG (Multi-Chassis Link Aggregation Group)</h2><ul>
+<li><p>LACP 구성할떄는 MAC주소가 1:1 로 구성되야함.<br>SPoF 구성을 피하고자 서버의 네트워크 인터페이스를 서로 다른 스위치에 연결하나 이떄는 스위치간에 MAC 주소가 달라 하나의 LACP로 구성할 수 없다.</p>
+</li>
+<li><p>MC-LAG 기술은 서로 다른 스위치간의 실제 MAC 주소 대신 하나의 가상 MAC주소를 만들어 논리 인터페이스로 lacp를 구성할 수 있다. </p>
+</li>
+</ul>
+<h3 id="MC-LAG-구성요소"><a href="#MC-LAG-구성요소" class="headerlink" title="MC-LAG 구성요소"></a>MC-LAG 구성요소</h3><ol>
+<li>Peer 장비 </li>
+<li>MC-LAG 도메인 : 두 Peer 장비를 하나의 논리 장비로 구성하기 위한 영역 ID로 각 Peer 장비는 영역 ID값을 통해 상대방 장비가 Peer 장비인지 판단</li>
+<li>Peer Link : MC-LAG을 구성하는 두 Peer 장비간의 데이터 트래픽을 전송하는 인터링크</li>
+</ol>
+<h3 id="기본-MC-LAG-설정"><a href="#기본-MC-LAG-설정" class="headerlink" title="기본 MC-LAG 설정"></a>기본 MC-LAG 설정</h3><ol>
+<li>Peer 간 동일한 도메인값 설정 </li>
+<li>Peer 간 데이터 트래픽 전송을 위한 Peer Link 설정 </li>
+<li>Peer 간 MC-LAG 제어 패킷 전송을 위해 통신 가능한 IP설정 </li>
+</ol>
+<h3 id="MC-LAG-동작방식"><a href="#MC-LAG-동작방식" class="headerlink" title="MC-LAG 동작방식"></a>MC-LAG 동작방식</h3><ol>
+<li>MC-LAG 제어 패킷을 통해 MC-LAG을 구성 (여러 Peer 장비가 하나의 도메인값으로 묶임)</li>
+<li>가상 MAC 주소 생성 </li>
+</ol>
+<h2 id="MC-LAG을-이용한-디자인"><a href="#MC-LAG을-이용한-디자인" class="headerlink" title="MC-LAG을 이용한 디자인"></a>MC-LAG을 이용한 디자인</h2><ul>
+<li>서로 다른 스위치로 서버를 AA로 구성하여 루프나 STP(Spanning Loop Protocol)에 의한 차단이 없는 네트워크 구조를 만들 수 있다.</li>
+</ul>
+<ol>
+<li>스위치를 이중화하여 서버와 LACP를 구성하여 마치 스위치 하나와 통신하는 것처럼 설계 </li>
+</ol>
+<p><img src="/images/network-ch11-03.jpg"></p>
+<ol start="2">
+<li>스위치간의 MC-LAG을 이용하여 루프 구조 제거 (STP에 의한 차단 포트없이 모든 포트 활용가능)</li>
+</ol>
+<p><img src="/images/network-ch11-04.jpg"></p>
+<ol start="3">
+<li>스위치간의 여러번 MC-LAG을 적용하여 상.하단을 모두 MC-LAG으로 구성하여 마치 1:1로 통신하는 것처럼 설계</li>
+</ol>
+<p><img src="/images/network-ch11-05.jpg"></p>
+<h2 id="게이트웨이-이중화"><a href="#게이트웨이-이중화" class="headerlink" title="게이트웨이 이중화"></a>게이트웨이 이중화</h2><ul>
+<li><p>Local 네트워크에서는 3계층 장비인 라우터의 도움없이 직접 ARP 를 broadcast해 통신 (L2통신) 하지만 외부 네트워크로 나갈떄는 게이트웨이 라우터없이는 L3 통신이 불가능하다. </p>
+</li>
+<li><p>Gataway Router를 LACP 구성과 유사하게 이중화시켜놓고 하나의 가상 IP, 가상 MAC주소를 가지게 하고 , 하위의 단말들은 가상 주소를 바라보게 하면 FailOver 보장 </p>
+</li>
+</ul>
+<h2 id="FHRP-First-Hop-Redundancy-Protocol"><a href="#FHRP-First-Hop-Redundancy-Protocol" class="headerlink" title="FHRP (First Hop Redundancy Protocol)"></a>FHRP (First Hop Redundancy Protocol)</h2><ul>
+<li>외부 네트워크와 통신하기 위해 사용되는 게이트웨이 라우터 장비를 두 대 이상의 장비로 구성할 수 있게 해주는 protocol </li>
+<li>FHRP 그룹은 동일한 가상 IP를 가지고 우선순위 값에 따라 어떤 장비가 Active 역할을 할 것인지 결정됨</li>
+<li>하위 단말이 ARP broadcast 요청을 보내면 FHRP 그룹내 Active 역할을 하는 장비가 응답</li>
+<li>Active 역할을 하는 장비가 장애발생시 StandBy 장비가 가상 IP주소의 MAC주소에 대한 MAC 주소 테이블을 변경하고, Active 역할을 대체 수행  </li>
+</ul>
+<h2 id="VRRP-Virtual-Router-Redundancy-Protocol"><a href="#VRRP-Virtual-Router-Redundancy-Protocol" class="headerlink" title="VRRP (Virtual Router Redundancy Protocol)"></a>VRRP (Virtual Router Redundancy Protocol)</h2><ul>
+<li>FHRP에 대한 표준 프로토콜</li>
+</ul>
+<h3 id="VRRP-동작방식"><a href="#VRRP-동작방식" class="headerlink" title="VRRP 동작방식"></a>VRRP 동작방식</h3><ol>
+<li>동일한 VRID 값을 가진 VRRP 그룹 설정 </li>
+<li>Active 역할을 수행할 마스터를 선출하기 위한 VRRP 설정한 장비간에 Hello 패킷 교환하여 서로의 우선순위 확인 (multicast)</li>
+<li>Hello 패킷을 3회 이상 수신하지 못하면 상대방을 비정상으로 간주해 자신이 마스터 장비가 된다.  </li>
+</ol>
+<ul>
+<li>마스터 장비 장얘시 MAC테이블만 갱신됨. 가상 IP주소와 가상 MAC주소가 변경된것은 아니므로 하위 단말들이 캐싱하고 있는 ARP테이블은 변경되지 않는다.  </li>
+</ul>
+<h2 id="올-액티브-게이트웨이-이중화"><a href="#올-액티브-게이트웨이-이중화" class="headerlink" title="올 액티브 게이트웨이 이중화"></a>올 액티브 게이트웨이 이중화</h2><ul>
+<li><p>앞선 FHRP는 AS방식으로 동작함. 하위 단말이 IP주소에 대한 ARP 요청이 ACTIVE 장비에서 응답하고, Standby 장비에서는 가상 IP주소에 대한 MAC 주소의 테이블을 Active 장비와 연결된 인터페이스로 학습한다. </p>
+</li>
+<li><p>게이트웨이 외부로 가기 위한 경로가 Standby 장비더라도 Active 장비를 거쳐서 외부 네트워크로 나간다. </p>
+</li>
+</ul>
+<p><img src="/images/network-ch11-06.jpg"></p>
+<ul>
+<li><p>Peer 장비 모두 게이트웨이 역할을 수행할 수 있음에도 불구하고 트래픽이 불필요하게 우회함으로 비효율적임 </p>
+</li>
+<li><p>MC-LAG 기술 사용시, 게이트웨이 이중화 가상 IP의 MAC주소를 Active장비와 StandBy 장비에서 모두 사용할 수 있도록 해 게이트웨이를 AA형태로 구성하는 기능을 제공한다. </p>
+</li>
+</ul>
+<h2 id="애니캐스트-게이트웨이"><a href="#애니캐스트-게이트웨이" class="headerlink" title="애니캐스트 게이트웨이"></a>애니캐스트 게이트웨이</h2><ul>
+<li>overlay 기반의 SDN 네트워크를 구현하면 같은 네트워크가 여러 위치에 존재하게 네트워크를 디자인할 수 있는데, 게이트웨이가 한 곳에만 위치하게 되면 모든 트래픽이 하나의 게이트웨이를 거쳐 통신함으로 비효율적이다. </li>
+<li>애니캐스트 게이트웨이 기술 적용 시, 각 위치에 같은 주소를 가지는 게이트웨이가 여러 개 동작할 수 있다.</li>
+<li>여러개의 같은 ip주소를 가지는 게이트웨이가 존재하지만 가장 가까운 위치에 있는 게이트웨이에서 서비스를 제공한다. </li>
+<li>게이트웨이가 여러 곳에 위치하므로, 하나의 게이트웨이에서 문제가 발생하여도 외부와 통신 가능 </li>
+</ul>
+</div><!--!--></article></div><!--!--><div class="card"><div class="card-content"><h3 class="title is-5">Comments</h3><div id="comment-container"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script><script>var gitalk = new Gitalk({
+            id: "cbd8d64213c1786af8d3d0a9f9248552",
+            repo: "gittalk",
+            owner: "devcs96",
+            clientID: "ad3debd03c0e5f289948",
+            clientSecret: "471b03d4771d8a3467d95e33fde1e2d8804d5da8",
+            admin: ["devcs96"],
+            createIssueManually: false,
+            distractionFreeMode: false,
+            perPage: 10,
+            pagerDirection: "last",
+            
+            
+            enableHotKey: true,
+            
+        })
+        gitalk.render('comment-container')</script></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2022/03/06/Item71/"><span class="level-item">Item71. 필요 없는 검사 예외 사용은 피하라</span><i class="level-item fas fa-chevron-right"></i></a></div></nav></div><div class="column column-left is-2-tablet is-2-desktop is-2-widescreen  order-1"><!--!--><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">Categories</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/Computer-Science/"><span class="level-start"><span class="level-item">Computer Science</span></span><span class="level-end"><span class="level-item tag">21</span></span></a><ul><li><a class="level is-mobile" href="/categories/Computer-Science/Algorithm/"><span class="level-start"><span class="level-item">Algorithm</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/Computer-Science/Data-Structure/"><span class="level-start"><span class="level-item">Data Structure</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/Computer-Science/Database/"><span class="level-start"><span class="level-item">Database</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/Computer-Science/Network/"><span class="level-start"><span class="level-item">Network</span></span><span class="level-end"><span class="level-item tag">8</span></span></a><ul><li><a class="level is-mobile" href="/categories/Computer-Science/Network/IT-%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A5%BC-%EC%9C%84%ED%95%9C-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EC%9E%85%EB%AC%B8/"><span class="level-start"><span class="level-item">IT 엔지니어를 위한 네트워크 입문</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Computer-Science/OS/"><span class="level-start"><span class="level-item">OS</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Design-Pattern/"><span class="level-start"><span class="level-item">Design Pattern</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/Infrastructure/"><span class="level-start"><span class="level-item">Infrastructure</span></span><span class="level-end"><span class="level-item tag">1</span></span></a><ul><li><a class="level is-mobile" href="/categories/Infrastructure/Kubernetes/"><span class="level-start"><span class="level-item">Kubernetes</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Java/"><span class="level-start"><span class="level-item">Java</span></span><span class="level-end"><span class="level-item tag">71</span></span></a><ul><li><a class="level is-mobile" href="/categories/Java/Effective-Java-3-E/"><span class="level-start"><span class="level-item">Effective Java 3/E</span></span><span class="level-end"><span class="level-item tag">65</span></span></a></li><li><a class="level is-mobile" href="/categories/Java/Jpa/"><span class="level-start"><span class="level-item">Jpa</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/Java/Junit/"><span class="level-start"><span class="level-item">Junit</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Java/Jvm/"><span class="level-start"><span class="level-item">Jvm</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/Javascript/"><span class="level-start"><span class="level-item">Javascript</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/Nodejs/"><span class="level-start"><span class="level-item">Nodejs</span></span><span class="level-end"><span class="level-item tag">1</span></span></a><ul><li><a class="level is-mobile" href="/categories/Nodejs/express/"><span class="level-start"><span class="level-item">express</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/kotlin/"><span class="level-start"><span class="level-item">kotlin</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/spring/"><span class="level-start"><span class="level-item">spring</span></span><span class="level-end"><span class="level-item tag">18</span></span></a><ul><li><a class="level is-mobile" href="/categories/spring/Batch/"><span class="level-start"><span class="level-item">Batch</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/spring/Core-Concept/"><span class="level-start"><span class="level-item">Core Concept</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/spring/Design-Pattern/"><span class="level-start"><span class="level-item">Design Pattern</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/spring/Jpa/"><span class="level-start"><span class="level-item">Jpa</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/spring/%ED%86%A0%EB%B9%84%EC%9D%98-spring/"><span class="level-start"><span class="level-item">토비의 spring</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%EA%B0%9C%EB%B0%9C-%EC%83%81%EC%8B%9D/"><span class="level-start"><span class="level-item">개발 상식</span></span><span class="level-end"><span class="level-item tag">2</span></span></a><ul><li><a class="level is-mobile" href="/categories/%EA%B0%9C%EB%B0%9C-%EC%83%81%EC%8B%9D/Git/"><span class="level-start"><span class="level-item">Git</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-03-12T04:55:27.000Z">2022-03-12</time></p><p class="title"><a href="/2022/03/12/network-ch12/">이중화 기술</a></p><p class="categories"><a href="/categories/Computer-Science/">Computer Science</a> / <a href="/categories/Computer-Science/Network/">Network</a> / <a href="/categories/Computer-Science/Network/IT-%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A5%BC-%EC%9C%84%ED%95%9C-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EC%9E%85%EB%AC%B8/">IT 엔지니어를 위한 네트워크 입문</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-03-06T08:35:03.000Z">2022-03-06</time></p><p class="title"><a href="/2022/03/06/Item71/">Item71. 필요 없는 검사 예외 사용은 피하라</a></p><p class="categories"><a href="/categories/Java/">Java</a> / <a href="/categories/Java/Effective-Java-3-E/">Effective Java 3/E</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-03-06T07:46:53.000Z">2022-03-06</time></p><p class="title"><a href="/2022/03/06/Item70/">Item70. 복구할 수 있는 상황에는 검사 예외를, 프로그래밍 오류에는 런타임 예외를 사용하라</a></p><p class="categories"><a href="/categories/Java/">Java</a> / <a href="/categories/Java/Effective-Java-3-E/">Effective Java 3/E</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-03-06T06:09:25.000Z">2022-03-06</time></p><p class="title"><a href="/2022/03/06/Item69/">Item69. 예외는 진짜 예외 상황에만 사용하라</a></p><p class="categories"><a href="/categories/Java/">Java</a> / <a href="/categories/Java/Effective-Java-3-E/">Effective Java 3/E</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-03-06T02:53:21.000Z">2022-03-06</time></p><p class="title"><a href="/2022/03/06/Item68/">Item68. 일반적으로 통용되는 명명 규칙을 따르라.</a></p><p class="categories"><a href="/categories/Java/">Java</a> / <a href="/categories/Java/Effective-Java-3-E/">Effective Java 3/E</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">Archives</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2022/03/"><span class="level-start"><span class="level-item">March 2022</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/02/"><span class="level-start"><span class="level-item">February 2022</span></span><span class="level-end"><span class="level-item tag">14</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/01/"><span class="level-start"><span class="level-item">January 2022</span></span><span class="level-end"><span class="level-item tag">42</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/12/"><span class="level-start"><span class="level-item">December 2021</span></span><span class="level-end"><span class="level-item tag">27</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/11/"><span class="level-start"><span class="level-item">November 2021</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/08/"><span class="level-start"><span class="level-item">August 2021</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/07/"><span class="level-start"><span class="level-item">July 2021</span></span><span class="level-end"><span class="level-item tag">22</span></span></a></li></ul></div></div></div><!--!--></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"></div><div class="level-end"></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
