@@ -145,7 +145,7 @@
 <p>위 프로그램을 실행하면 예외 자체는 터지지 않지만 deadlock상태에 빠진다. 백그라운드 thread가 s.removeObserver를 호출하면 observer에 대한 lock을 얻어 잠그려고 시도하지만 main thread가 이미 lock을 가지고 있기 떄문에, lock을 얻을 수가 없는 상태이다. 동시에 main thread는 background thread가 observer를 제거하기만을 기다리고 있다. </p>
 <p>위 두 예제는 사실 억지스러운 예제지만 동기화된 영역안에서 client로부터 넘겨받는 코드를 호출하는게 얼마나 프로그램이 오작동하게 만들기 쉬운지를 보여준다. </p>
 <p>만약 불변식이 임시로 꺠진 경우라면 Java의 Lock은 재진입을 허용함으로 교착상태에 빠지지 않으므로,다음번 Lock 획득도 성공하고 결과적으로 데이터가 원치 않는 상태로 훼손될 수 있다. </p>
-<h2 id="해결-방안"><a href="#해결-방안" class="headerlink" title="해결 방안"></a>해결 방안</h2><p>alien method를 동기화 block 바깥으로 옮겨주면 된다고 한다. 이렇게 동기화 영역 바깥에서 호출되는 외계인 메소드를 열린 호출(open call)이라고 부른다고 한다. </p></div><a class="article-more button is-small is-size-7" href="/2022/03/28/Item79/#more">Read more</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-03-27T08:37:43.000Z" title="2022. 3. 27. 오후 5:37:43">2022-03-27</time></span><span class="level-item">Updated&nbsp;<time dateTime="2022-03-27T16:05:14.911Z" title="2022. 3. 28. 오전 1:05:14">2022-03-28</time></span><span class="level-item"><a class="link-muted" href="/categories/Java/">Java</a><span> / </span><a class="link-muted" href="/categories/Java/Effective-Java-3-E/">Effective Java 3/E</a></span><span class="level-item">6 minutes read (About 844 words)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2022/03/27/Item81/">Item81. wait와 notify보다는 동시성 유틸리티를 애용하라</a></h1><div class="content"><p>wait 와 notify 에 대한 개념을 정리하기 앞서,  java의 Monitor라는 동시성 이슈를 해결하기 위한 동기화 mechanism 이 있다고 한다.</p>
+<h2 id="해결-방안"><a href="#해결-방안" class="headerlink" title="해결 방안"></a>해결 방안</h2><p>alien method를 동기화 block 바깥으로 옮겨주면 된다고 한다. 이렇게 동기화 영역 바깥에서 호출되는 외계인 메소드를 열린 호출(open call)이라고 부른다고 한다. </p></div><a class="article-more button is-small is-size-7" href="/2022/03/28/Item79/#more">Read more</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-03-27T08:37:43.000Z" title="2022. 3. 27. 오후 5:37:43">2022-03-27</time></span><span class="level-item">Updated&nbsp;<time dateTime="2022-04-03T09:57:03.706Z" title="2022. 4. 3. 오후 6:57:03">2022-04-03</time></span><span class="level-item"><a class="link-muted" href="/categories/Java/">Java</a><span> / </span><a class="link-muted" href="/categories/Java/Effective-Java-3-E/">Effective Java 3/E</a></span><span class="level-item">6 minutes read (About 844 words)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2022/03/27/Item81/">Item81. wait와 notify보다는 동시성 유틸리티를 애용하라</a></h1><div class="content"><p>wait 와 notify 에 대한 개념을 정리하기 앞서,  java의 Monitor라는 동시성 이슈를 해결하기 위한 동기화 mechanism 이 있다고 한다.</p>
 <ul>
 <li><p>Monitor는 한번에 한 thread만 공유자원에 접근할수 있도록 critical section 에 하나의 thread만 존재할 수 있도록 보장해준다. 일종의 lock 개념과 유사하다. </p>
 </li>
@@ -156,7 +156,7 @@
 <ul>
 <li>wait method : 객체의 monitor를 가지고 있는 thread ( synchronized block 안에 있는 thread)가 실행이 멈춘다. monitor를 가지고 있지 않는 thread가 이 method를 호출하게 되면 IllegalMonitorStateException 을 던진다.</li>
 </ul>
-<p><img src="/images/Item81-01jpg"></p>
+<p><img src="/images/Item81-01.jpg"></p>
 <ul>
 <li>notify method : wait하고 있는 thread중에 하나의 thread를 꺠운다. </li>
 </ul>
